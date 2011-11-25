@@ -43,25 +43,25 @@ function MCD_init(){
 }
 
 /* add a query var to wp router */
-function add_var_layout($query_vars){
-	$query_vars[] = 'layout';
+function MCD_add_vars($query_vars){
+	$query_vars[] = 'platform';
 	$query_vars[] = 'browser';
 	return $query_vars;
 }
 
 /* just before the theme is loaded */
-function set_var_layout(){
+function MCD_set_vars(){
 	
 	global $wp_query;
 	
 	/* Stage 1: Platform Detection - supports several desktop platforms as well */
 	$ua = trim(strtolower($_SERVER['HTTP_USER_AGENT']));
 	$pattern = '/(android|blackberry|ip(hone|ad|od)|iemobile|webos|palm|symbian|kindle|windows|win64|wow64|macintosh|intel\smac\sos\sx|ppx\smac\sos\sx|googlebot|googlebot-mobile)/';
-	if(preg_match($pattern,$ua,$matches)){$os=$matches[0];}
+	if(preg_match($pattern,$ua,$matches)){$platform=$matches[0];}
 	
-	switch($os){
+	switch($platform){
 		
-		/* mobile devices */
+		/* mobile platforms */
 		case 'android':
 		case 'blackberry':
 		case 'ipad':
@@ -73,11 +73,10 @@ function set_var_layout(){
 		case 'symbian':
 		case 'kindle':
 		case 'googlebot-mobile':
-			$layout= $os;
-			if(MCD_GENERAL_ONLY){$layout='mobile';}
+			if(MCD_GENERAL_ONLY){$platform='mobile';}
 			break;
 		
-		/* desktop devices */
+		/* desktop platforms */
 		/* ... */
 		case 'windows':
 		case 'win64':
@@ -86,18 +85,17 @@ function set_var_layout(){
 		case 'ppx mac os x':
 		case 'intel mac os x':
 		case 'googlebot':
-			$layout= $os;
-			if(MCD_GENERAL_ONLY){$layout='desktop';}
+			if(MCD_GENERAL_ONLY){$platform='desktop';}
 			break;
 		
 		/* in case nothing else matches */
 		default:
-			$layout='desktop';
+			$platform='desktop';
 			break;
 	}
-	$wp_query->set('layout',$layout);
+	$wp_query->set('platform',$platform);
 	
-	/* Stage 2: Browser Detection - may consider bots */
+	/* Stage 2: Browser Detection */
 	$pattern = '/(firefox|fennec|msie\s5\.0|msie\s6\.0|msie\s7\.0|msie\s8\.0|msie\s9\.0|msie\s10\.0|iemobile|chrome|safari\smobile|safari|camino|googlebot|googlebot-mobile|w3c_validator)/';
 	if (preg_match($pattern, $ua, $matches)){$browser=$matches[0];}
 	switch($browser){
@@ -124,6 +122,7 @@ function set_var_layout(){
 			if(MCD_GENERAL_ONLY){$browser='desktop';}
 			break;
 		
+		/* bots */
 		case 'w3c_validator':
 			if(MCD_GENERAL_ONLY){$browser='bot';}
 			break;
@@ -139,10 +138,10 @@ function set_var_layout(){
 function mcd_footer_callback($content){
 	
 	/* getting query_vars */
-	if(get_query_var('layout')){$layout = get_query_var('layout');}
+	if(get_query_var('platform')){$platform = get_query_var('platform');}
 	if(get_query_var('browser')){$browser = get_query_var('browser');}
 	
-		switch($layout){
+		switch($platform){
 			
 			/* mobile clients */
 			case 'mobile':						$tag = 'Mobile';
@@ -153,7 +152,7 @@ function mcd_footer_callback($content){
 																break;
 			case 'iphone':		
 			case 'ipad':			
-			case 'ipod':							$tag = 'iPhone';
+			case 'ipod':							$tag = 'Apple';
 																break;
 			case 'iemobile':					$tag = 'mobile IE';
 																break;
@@ -181,18 +180,20 @@ function mcd_footer_callback($content){
 																break;
 			
 			/* this case will not happen - since the query_var defaults to desktop */
-			default:							$tag = $layout;break;
+			default:							$tag = $platform;break;
 			
 		}
 	
 	$html =	'<span style="color:#FCFCFC;height:16px;margin-top:-16px;display:block;">
 						&raquo; You are currently viewing the '.$tag.' version of this blog ('.$browser.') &laquo;</span>';
-	// $html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
+	$html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
 	echo $html;
 }
 
 add_action('init', 'MCD_init');
-add_filter('query_vars', 'add_var_layout');
-add_filter('wp_head', 'set_var_layout');
-if(MCD_FOOTER_OUTPUT && !is_admin()){add_action('wp_footer', 'mcd_footer_callback');}
+add_filter('query_vars', 'MCD_add_vars');
+add_filter('wp_head', 'MCD_set_vars');
+if(MCD_FOOTER_OUTPUT && !is_admin()){
+	add_action('wp_footer', 'mcd_footer_callback');
+}
 ?>
