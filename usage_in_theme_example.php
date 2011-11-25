@@ -13,9 +13,9 @@
 	*/
 	
 	/* if the query_var even exists */
-	if(get_query_var('layout')){
+	if(get_query_var('platform')){
 		
-		$layout = get_query_var('layout');
+		$layout = get_query_var('platform');
 		
 		switch($layout){
 			
