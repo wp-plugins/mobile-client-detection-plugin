@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Mobile Client Detection Plug-in
 	Plugin URI: http://plugins.codefx.biz/mobile-client-detection.zip
-	Description: In case the mobile version of your blog shall have another layout ... this plug-in can provide the require variable for switching the layout within your theme!! Currently it can detect the following user-agents: Android, Blackberry, iPad, iPhone, iPod, IE mobile, webOS, GoogleBot mobile. 
+	Description: The Mobile Client Detection Plug-in provides query_vars 'platform' & 'browser' for simply switching the layout within your theme (requires editing template files). It can also be very helpful when it’s required to load different versions of CSS/JS code.
 	Author: Martin Zeitler
 	Version: 0.5
 	Tags: plugin, mobile, theme, detect, query_var, layout, switch
