@@ -14,14 +14,16 @@ It can also be very helpful when it’s required to load different versions of CSS
 
 == Description ==
 
-In case the mobile version of your blog shall have a completely different layout …
+In case the mobile version of your blog shall have a different layout,
+Or if you need to load alternate CSS/JS files for a specific browsers:
 This plug-in provides the required variable for serving a customized version of your theme!!
 
 Currently it can detect the following user-agents: Android, Blackberry,
 iPad, iPhone, iPod, IE mobile, webOS and even GoogleBot mobile.
 
-Beside that it can detect various desktop platforms & browsers (it can detect Internet Explorer),
-so it's quite handy for fixing things for specific user-agents - instead of conditional CSS.
+Beside that it can detect various desktop platforms & browsers -
+so it's quite handy for fixing things for specific user-agents
+(instead of using conditional CSS).
 
 == Installation ==
 
