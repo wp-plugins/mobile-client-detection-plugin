@@ -10,7 +10,7 @@ Stable tag: 0.2
 The Mobile Client Detection Plug-in provides query_vars 'platform' & 'browser'
 for simply switching the layout within your theme (requires editing template files).
 
-It can also be very helpful when it’s required to load different versions of CSS/JS code.
+It can also be very helpful when itâ€™s required to load different versions of CSS/JS code.
 
 == Description ==
 
@@ -27,15 +27,15 @@ so it's quite handy for fixing things for specific user-agents
 
 == Installation ==
 
-1. Upload the ‘mobile-client-detection’ directory into the ‘/wp-content/plugins/’ directory.
-2. Activate the plugin through the ‘Plugins’ menu within WordPress.
+1. Upload the â€˜mobile-client-detectionâ€™ directory into the â€˜/wp-content/plugins/â€™ directory.
+2. Activate the plugin through the â€˜Pluginsâ€™ menu within WordPress.
 3. It operates quite silently.
 
 == Frequently Asked Questions ==
 
 = How does it work ? =
 The plugin just adds another query_var to each request (it uses PHP instead of mod_rewrite) -
-which can be used to show different templates – or to create templates with multi device support.
+which can be used to show different templates â€“ or to create templates with multi device support.
 
 = Which values can the query_var 'platform' return ? =
 Currently it returns the tag for each known mobile end-device:
@@ -44,21 +44,21 @@ android, blackberry, windows, ipad, iphone, ipod, iemobile, webos, kindle, symbi
 Set option $general_only=false; in case you should require more general result.
 
 The value 'desktop' can be (most likely) considered as a desktop PC -
-since there’s pretty much any popular mobile platform covered.
+since thereâ€™s pretty much any popular mobile platform covered.
 
 = Which values can the query_var 'browser' return ? =
 ...
 
 = Does this plugin have any options ? =
-There’s currently 2 options:
-$general_only = true/false – return only ‘mobile’ or ‘desktop’ instead of detail info
-$footer_output = true/false – append output to footer (good for testing purposes)
+Thereâ€™s currently 2 options:
+$general_only = true/false â€“ return only â€˜mobileâ€™ or â€˜desktopâ€™ instead of detail info
+$footer_output = true/false â€“ append output to footer (good for testing purposes)
 
-The next version might add settings to the admin panel…
+The next version might add settings to the admin panelâ€¦
 
 == Screenshots ==
 
-There are no screenshots – since this plugin has no output.
+There are no screenshots â€“ since this plugin has no output.
 
 == Changelog ==
 = 0.5 =
