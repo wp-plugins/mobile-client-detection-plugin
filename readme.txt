@@ -70,7 +70,7 @@ $footer_output = true/false – append output to footer (good for testing purpos
 
 = Which features will be implemented next ? =
 a) add option toggles to the admin panel
-b) add template switching by filename capability
+b) add template-switching by filename capability
 
 == Screenshots ==
 
