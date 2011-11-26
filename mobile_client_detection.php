@@ -38,11 +38,12 @@ function mcd_init(){
 	add_filter('wp_head', 'mcd_set_vars');
 	
 	/* if debug mode is enabled */
-	if(!is_admin() && mcd_DEBUG_OUTPUT){add_action('wp_footer', 'mcd_debug_output');}
+	$mcd_options = mcd_get_option();
+	if((int)$mcd_options[1]==1){$debug_output=true;}
+	if(!is_admin() && $debug_output){add_action('wp_footer', 'mcd_debug_output');}
 	
 	/* add options page for admins */
 	if(is_admin()){add_action('admin_menu', 'mcd_plugin_menu');}
-	
 }
 
 /* add a query var to wp router */
