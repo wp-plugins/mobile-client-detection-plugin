@@ -1,6 +1,6 @@
 === Mobile Client Detection Plug-in ===
 
-Contributors: Martin Zeitler
+Contributors: syslogic
 Donate link: http://www.codefx.biz/donations
 Tags: plugin, mobile, phone, tablet, theme, detect, query_var, layout, switch, page speed, platform, browser
 Requires at least: 3.0.0
