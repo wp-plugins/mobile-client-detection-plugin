@@ -35,7 +35,7 @@ so it's quite handy for fixing things for specific user-agents
 
 = How does it work ? =
 The plugin just adds another query_var to each request (it uses PHP instead of mod_rewrite) -
-which can be used to show different templates (not yet implemented...) – or to create templates with multi device support.
+which can be used to load different template file (not yet implemented) – or to create templates with multi device support.
 
 = Which values can the query_var 'platform' return ? =
 Currently it returns the tag for each known platform:
