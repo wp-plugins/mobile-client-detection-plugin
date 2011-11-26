@@ -2,7 +2,7 @@
 
 Contributors: Martin Zeitler
 Donate link: http://www.codefx.biz/donations
-Tags: plugin, mobile, theme, detect, query_var, layout, switch, page speed, platform, browser
+Tags: plugin, mobile, phone, tablet, theme, detect, query_var, layout, switch, page speed, platform, browser
 Requires at least: 3.0.0
 Tested up to: 3.2.1
 Stable tag: 0.2
