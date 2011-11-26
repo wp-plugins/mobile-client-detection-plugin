@@ -31,27 +31,11 @@ if(!defined('WP_PLUGIN_DIR')){die();}
 define('mcd_PLUGIN_DIR', WP_PLUGIN_DIR.'/'.plugin_basename(dirname( __FILE__)));
 define('mcd_PLUGIN_URL', WP_PLUGIN_URL.'/'.plugin_basename(dirname( __FILE__)));
 
-/* load configuration options */
-$mcd_options = mcd_get_option();
-
-/* not yet implememted */
-$add_query_vars = true;
-$switch_template = false;
-$switch_theme = false;
-
-define('mcd_GENERAL_ONLY',(($mcd_options[0]==0)? true : false));
-define('mcd_DEBUG_OUTPUT',(($mcd_options[1]==1)? true : false));
-define('mcd_ADD_QUERY_VARS', $add_query_vars);
-define('mcd_SWITCH_TEMPLATE', $switch_template);
-define('mcd_SWITCH_THEME', $switch_theme);
-
 /* init */
 function mcd_init(){
 	
-	if(mcd_ADD_QUERY_VARS){
-		add_filter('query_vars', 'mcd_add_vars');
-		add_filter('wp_head', 'mcd_set_vars');
-	}
+	add_filter('query_vars', 'mcd_add_vars');
+	add_filter('wp_head', 'mcd_set_vars');
 	
 	/* if debug mode is enabled */
 	if(!is_admin() && mcd_DEBUG_OUTPUT){add_action('wp_footer', 'mcd_debug_output');}
@@ -235,7 +219,7 @@ function mcd_options_page_hook(){
 	?>
 	<div class="wrap">
 		<div class="icon32" id="icon-options-general"></div>
-		<h2><a href="http://www.codefx.biz/donations"><?php echo __('Mobile Client Detection', 'mcd_plugin');?></a></h2>
+		<h2><a href="http://www.codefx.biz/donations"><?php echo __('Mobile Client Detection','mcd_plugin');?></a></h2>
 		<div class="su-tabs">
 		<?php
 		if($_POST){
@@ -299,6 +283,5 @@ function mcd_get_option( $name = NULL ){
 		return FALSE;
 	}
 }
-
 add_action('init', 'mcd_init');
 ?>
