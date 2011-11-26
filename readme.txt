@@ -49,7 +49,7 @@ c)
 windows, win64, wow64, macintosh, ppx mac os x, intel mac os x
 (or general: desktop).
 
-Set option $general_only=true; in case you require more general result.
+Set option $general_only=true; in case you require the general result.
 
 The value 'desktop' can be (most likely) considered as a desktop PC -
 since there’s pretty much any popular mobile platform covered.
