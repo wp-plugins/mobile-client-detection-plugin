@@ -39,8 +39,8 @@ which can be used to show different templates – or to create templates with mu
 
 = Which values can the query_var 'platform' return ? =
 Currently it returns the tag for each known platform:
-a) android 1, android 2, android 3,android 4, ipad, kindle (or tablet by default).
-b) blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or mobile by default).
+a) android 1, android 2, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or mobile by default).
+b) android 3,android 4, ipad, kindle (or tablet by default).
 c) windows, win64, wow64, macintosh, ppx mac os x, intel mac os x (or desktop by default).
 
 Set option $general_only=true; in case you require more general result.
