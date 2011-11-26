@@ -21,7 +21,7 @@ This plug-in provides the required variable for serving a customized version of 
 Currently it can detect the following mobile platforms: Android Phones and Tablets,
 Blackberry, iPad, iPhone, iPod, IE mobile, Kindle, SymbianOS, PalmOS, webOS and GoogleBot mobile.
 
-Beside that it can detect various desktop platforms / browsers -
+Internet Explorer & Android version detection are supported -
 so it's quite handy for fixing things for specific user-agents
 (instead of using conditional CSS).
 
@@ -35,13 +35,19 @@ so it's quite handy for fixing things for specific user-agents
 
 = How does it work ? =
 The plugin just adds another query_var to each request (it uses PHP instead of mod_rewrite) -
-which can be used to show different templates – or to create templates with multi device support.
+which can be used to show different templates (not yet implemented...) – or to create templates with multi device support.
 
 = Which values can the query_var 'platform' return ? =
 Currently it returns the tag for each known platform:
-a) android 1, android 2, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or mobile by default).
-b) android 3,android 4, ipad, kindle (or tablet by default).
-c) windows, win64, wow64, macintosh, ppx mac os x, intel mac os x (or desktop by default).
+a)
+android 1, android 2, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile
+(or general: mobile).
+b)
+android 3,android 4, ipad, kindle
+(or general: tablet).
+c)
+windows, win64, wow64, macintosh, ppx mac os x, intel mac os x
+(or general: desktop).
 
 Set option $general_only=true; in case you require more general result.
 
@@ -49,7 +55,13 @@ The value 'desktop' can be (most likely) considered as a desktop PC -
 since there’s pretty much any popular mobile platform covered.
 
 = Which values can the query_var 'browser' return ? =
-...
+Currently it returns the tag for each known browser:
+a)
+fennec, iemobile, mobile safari, googlebot-mobile (or general: mobile).
+b)
+msie 5,msie 6, msie 7, msie 8, msie 9, chrome, camino, firefox, safari (or general: desktop)
+c)
+w3c_validator, googlebot (or general: bot)
 
 = Does this plugin have any options ? =
 There’s currently 2 options:
@@ -67,6 +79,7 @@ There are no screenshots – since this plugin has no output.
 * Tablet detection added (thanks to Mystech)
 * Android & IE Version detection added
 * Mobile Safari detection fixed
+* readme.txt updated
 
 = 0.5 =
 * Support for Kindle & Symbian added
