@@ -5,7 +5,7 @@ Donate link: http://www.codefx.biz/donations
 Tags: plugin, mobile, phone, tablet, theme, detect, query_var, layout, switch, page speed, platform, browser
 Requires at least: 3.0.0
 Tested up to: 3.2.1
-Stable tag: 0.2
+Stable tag: 0.7
 
 The Mobile Client Detection Plug-in provides query_vars 'platform' & 'browser'
 for simply switching the layout within your theme (requires editing template files).
