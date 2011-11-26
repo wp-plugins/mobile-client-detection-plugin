@@ -1,7 +1,7 @@
 <?php
 	/*
 		Mobile Client Detection Plug-In usage example
-		this is an example how provided query_var 'layout' can be used in your theme
+		this is an example how provided query_var 'platform' and 'browser' can be used in your theme
 		
 		- place this code into your theme (e.g. functions.php, index.php, header.php)
 		  the concrete placement merely depends on the concrete situation
@@ -15,19 +15,21 @@
 	/* if the query_var even exists */
 	if(get_query_var('platform')){
 		
-		$layout = get_query_var('platform');
+		$platform = get_query_var('platform');
 		
-		switch($layout){
+		switch($platform){
 			
 			/* mobile clients */
 			case 'mobile':		$tag = 'Mobile';break;
 			case 'android':		$tag = 'Android';break;
 			case 'blackberry':$tag = 'BlackBerry';break;
-			case 'iphone':		
-			case 'ipad':			
-			case 'ipod':			$tag = 'iPhone';break;
+			case 'iphone':
+			case 'ipad':
+			case 'ipod':			$tag = 'Apple';break;
 			case 'iemobile':	$tag = 'mobile IE';break;
 			case 'webos':			$tag = 'webOS';break;
+			case 'kindle':		$tag = 'Kindle';break;
+			case 'palm':			$tag = 'Palm';break;
 			
 			/* desktop clients */
 			case 'windows':
@@ -39,12 +41,16 @@
 			case 'desktop':		$tag = 'Desktop';break;
 			
 			/* this case will not happen - since the query_var defaults to desktop */
-			default:					$tag = $layout;break;
-			
+			default:					$tag = $platform;break;
 		}
 		
 		if(get_query_var('browser')){
 			$browser = get_query_var('browser');
+			switch($browser){
+				
+				/* ... */
+				
+			}
 		}
 		
 	}
