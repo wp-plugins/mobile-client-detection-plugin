@@ -14,8 +14,8 @@ It can also be very helpful when it’s required to load different versions of C
 
 == Description ==
 
-In case the mobile version of your blog shall have a different layout,
-Or if you need to load alternate CSS/JS files for a specific browsers:
+In case the mobile version of your blog shall have a different layout
+or if you need to load alternate CSS/JS files for a specific browsers:
 This plug-in provides the required variable for serving a customized version of your theme!!
 
 Currently it can detect the following mobile platforms: Android, Blackberry,
