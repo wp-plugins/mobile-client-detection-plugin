@@ -29,7 +29,7 @@ so it's quite handy for fixing things for specific user-agents
 
 1. Upload the 'mobile-client-detection-plugin' directory into the '/wp-content/plugins/' directory.
 2. Activate the plugin through the 'Plugins' menu within WordPress.
-3. It operates quite silently.
+3. It operates quite silently (unless debug output is enabled).
 
 == Frequently Asked Questions ==
 
