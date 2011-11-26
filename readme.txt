@@ -65,10 +65,11 @@ w3c_validator, googlebot (or general: bot)
 
 = Does this plugin have any options ? =
 You can find the options in the menu under Settings -> Client Detection.
+Template & theme switching has not been implemented yet.
 
-= Which features will be implemented next ? =
-a) add template-switching capability
-b) add theme-switching capability
+= Which further core features will be implemented until v1.0 ? =
+a) template-switching capability by type/device
+b) theme-switching capability by type/device
 
 == Screenshots ==
 
