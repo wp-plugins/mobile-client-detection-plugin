@@ -77,7 +77,7 @@ b) theme-switching capability by type/device
 
 == Changelog ==
 = 0.7 =
-* Plugin options page added.
+* Basic options page added.
 
 = 0.6 =
 * Tablet detection added (thanks to Mystech).
