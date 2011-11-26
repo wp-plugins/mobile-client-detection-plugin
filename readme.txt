@@ -74,7 +74,7 @@ b) add template-switching by filename capability
 
 == Screenshots ==
 
-There are no screenshots – since this plugin has no output.
+There are currently no screenshots – since the settings page does not exist yet.
 
 == Changelog ==
 = 0.6 =
