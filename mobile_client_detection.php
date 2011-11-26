@@ -127,8 +127,9 @@ function MCD_set_vars(){
 			if(MCD_GENERAL_ONLY){$browser='desktop';}
 			break;
 		
-		/* bots */
+		/* desktop bots */
 		case 'w3c_validator':
+		case 'googlebot':
 			if(MCD_GENERAL_ONLY){$browser='bot';}
 			break;
 		
