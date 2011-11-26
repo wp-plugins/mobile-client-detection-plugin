@@ -81,4 +81,6 @@ There are no screenshots – since this plugin has no output.
 
 = 0.2 =
 * Initial release.
+
+= 0.1 =
 * Proof of concept.
