@@ -19,7 +19,7 @@ Or if you need to load alternate CSS/JS files for a specific browsers:
 This plug-in provides the required variable for serving a customized version of your theme!!
 
 Currently it can detect the following user-agents: Android, Blackberry,
-iPad, iPhone, iPod, IE mobile, webOS and even GoogleBot mobile.
+iPad, iPhone, iPod, IE mobile, Kindle, SymbianOS, PalmOS, webOS and GoogleBot mobile.
 
 Beside that it can detect various desktop platforms & browsers -
 so it's quite handy for fixing things for specific user-agents
@@ -27,8 +27,8 @@ so it's quite handy for fixing things for specific user-agents
 
 == Installation ==
 
-1. Upload the ‘mobile-client-detection’ directory into the ‘/wp-content/plugins/’ directory.
-2. Activate the plugin through the ‘Plugins’ menu within WordPress.
+1. Upload the 'mobile-client-detection-plugin' directory into the '/wp-content/plugins/' directory.
+2. Activate the plugin through the 'Plugins' menu within WordPress.
 3. It operates quite silently.
 
 == Frequently Asked Questions ==
@@ -39,7 +39,7 @@ which can be used to show different templates – or to create templates with mu
 
 = Which values can the query_var 'platform' return ? =
 Currently it returns the tag for each known mobile end-device:
-android, blackberry, windows, ipad, iphone, ipod, iemobile, webos, kindle, symbian googlebot-mobile, desktop (by default)
+android, blackberry, windows, ipad, iphone, ipod, iemobile, webos, kindle, symbian, googlebot-mobile, desktop (by default)
 
 Set option $general_only=false; in case you should require more general result.
 
@@ -51,7 +51,7 @@ since there’s pretty much any popular mobile platform covered.
 
 = Does this plugin have any options ? =
 There’s currently 2 options:
-$general_only = true/false – return only ‘mobile’ or ‘desktop’ instead of detail info
+$general_only = true/false – return only 'mobile' or 'desktop' instead of detail info
 $footer_output = true/false – append output to footer (good for testing purposes)
 
 The next version might add settings to the admin panel…
