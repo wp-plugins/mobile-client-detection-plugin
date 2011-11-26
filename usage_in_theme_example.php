@@ -19,13 +19,18 @@
 		
 		switch($platform){
 			
-			/* mobile clients */
+			/* phones */
 			case 'mobile':		$tag = 'Mobile';break;
-			case 'android':		$tag = 'Android';break;
+			case 'android 1':	
+			case 'android 2':	$tag = 'Android (Phone)';
+												break;
+			case 'android 3':	
+			case 'android 4':	$tag = 'Android (Tablet)';
+												break;
 			case 'blackberry':$tag = 'BlackBerry';break;
-			case 'iphone':
-			case 'ipad':
-			case 'ipod':			$tag = 'Apple';break;
+			case 'iphone':		
+			case 'ipod':			$tag = 'Apple (Phone)';break;
+			case 'ipad':			$tag = 'Apple (Tablet)';break;
 			case 'iemobile':	$tag = 'mobile IE';break;
 			case 'webos':			$tag = 'webOS';break;
 			case 'kindle':		$tag = 'Kindle';break;

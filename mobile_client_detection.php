@@ -4,7 +4,7 @@
 	Plugin URI: http://wordpress.org/extend/plugins/mobile-client-detection-plugin/
 	Description: The Mobile Client Detection Plug-in provides query_vars 'platform' & 'browser' for simply switching the layout within your theme (requires editing template files). It can also be very helpful when it’s required to load different versions of CSS/JS code.
 	Author: Martin Zeitler
-	Version: 0.6
+	Version: 0.6.1
 	Tags: plugin, mobile, theme, detect, query_var, layout, switch, page speed, platform, browser
 	Author URI: http://www.codefx.biz/contact
 */
@@ -148,7 +148,7 @@ function mcd_footer_callback($content){
 	
 		switch($platform){
 			
-			/* mobile clients */
+			/* phones */
 			case 'mobile':						$tag = 'Mobile';
 																break;
 			case 'android 1':					
@@ -156,8 +156,8 @@ function mcd_footer_callback($content){
 																break;
 			case 'blackberry':				$tag = 'BlackBerry';
 																break;
-			case 'iphone':		
-			case 'ipod':							$tag = 'Apple';
+			case 'iphone':
+			case 'ipod':							$tag = 'Apple (Phone)';
 																break;
 			case 'iemobile':					$tag = 'mobile IE';
 																break;
@@ -167,14 +167,15 @@ function mcd_footer_callback($content){
 			/* tablets */
 			case 'tablet':						$tag = 'Tablet';
 																break;
-			case 'android 3':					
+			case 'android 3':
 			case 'android 4':					$tag = 'Android (Tablet)';
 																break;
-			case 'ipod':							$tag = 'Apple (Tablet)';
+			case 'ipad':							$tag = 'Apple (Tablet)';
 																break;
 			/* desktop clients */
 			case 'windows':						$tag = 'Windows';
 																break;
+			case 'wow64':
 			case 'win64':							$tag = 'Windows 64-bit';
 																break;
 			case 'macintosh':					$tag = 'Macintosh';
