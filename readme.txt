@@ -18,10 +18,10 @@ In case the mobile version of your blog shall have a different layout,
 Or if you need to load alternate CSS/JS files for a specific browsers:
 This plug-in provides the required variable for serving a customized version of your theme!!
 
-Currently it can detect the following user-agents: Android, Blackberry,
+Currently it can detect the following mobile platforms: Android, Blackberry,
 iPad, iPhone, iPod, IE mobile, Kindle, SymbianOS, PalmOS, webOS and GoogleBot mobile.
 
-Beside that it can detect various desktop platforms & browsers -
+Beside that it can detect various desktop platforms / browsers -
 so it's quite handy for fixing things for specific user-agents
 (instead of using conditional CSS).
 
@@ -38,10 +38,10 @@ The plugin just adds another query_var to each request (it uses PHP instead of m
 which can be used to show different templates – or to create templates with multi device support.
 
 = Which values can the query_var 'platform' return ? =
-Currently it returns the tag for each known mobile end-device:
+Currently it returns the tag for each known mobile device:
 android, blackberry, windows, ipad, iphone, ipod, iemobile, webos, kindle, symbian, googlebot-mobile, desktop (by default)
 
-Set option $general_only=false; in case you should require more general result.
+Set option $general_only=true; in case you require more general result.
 
 The value 'desktop' can be (most likely) considered as a desktop PC -
 since there’s pretty much any popular mobile platform covered.
