@@ -66,7 +66,7 @@ There are no screenshots – since this plugin has no output.
 = 0.6 =
 * Tablet detection added (thanks to Mystech)
 * Android & IE Version detection added
-* Mobile Safari detetcion fixed
+* Mobile Safari detection fixed
 
 = 0.5 =
 * Support for Kindle & Symbian added
