@@ -1,12 +1,12 @@
 <?php
 /*
-	Plugin Name: Mobile Client Detection Plug-in
+	Plugin Name: Mobile Client Detection Plugin
 	Plugin URI: http://wordpress.org/extend/plugins/mobile-client-detection-plugin/
 	Description: The Mobile Client Detection Plug-in provides query_vars 'platform' & 'browser' for simply switching the layout within your theme (requires editing template files). It can also be very helpful when it’s required to load different versions of CSS/JS code.
 	Author: Martin Zeitler
-	Version: 0.6.2
+	Version: 0.7.0
 	Tags: plugin, mobile, theme, detect, query_var, layout, switch, page speed, platform, browser
-	Author URI: http://www.codefx.biz/contact
+	Author URI: http://www.codefx.biz
 */
 
 /*
@@ -27,39 +27,55 @@
 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/* configuration options */
-$general_only = false;
-$footer_output = true;
+if(!defined('WP_PLUGIN_DIR')){die();}
+define('mcd_PLUGIN_DIR', WP_PLUGIN_DIR.'/'.plugin_basename(dirname( __FILE__)));
+define('mcd_PLUGIN_URL', WP_PLUGIN_URL.'/'.plugin_basename(dirname( __FILE__)));
+
+/* load configuration options */
+$mcd_options = mcd_get_option();
 
 /* not yet implememted */
+$add_query_vars = true;
 $switch_template = false;
 $switch_theme = false;
 
-
-if(!defined('WP_PLUGIN_DIR')){die();}
-define('MCD_PLUGIN_DIR', WP_PLUGIN_DIR.'/'.plugin_basename(dirname( __FILE__)));
-define('MCD_PLUGIN_URL', WP_PLUGIN_URL.'/'.plugin_basename(dirname( __FILE__)));
-define('MCD_GENERAL_ONLY', $general_only);
-define('MCD_FOOTER_OUTPUT', $footer_output);
-define('MCD_SWITCH_TEMPLATE', $switch_template);
-define('MCD_SWITCH_THEME', $switch_theme);
+define('mcd_GENERAL_ONLY',(($mcd_options[0]==0)? true : false));
+define('mcd_DEBUG_OUTPUT',(($mcd_options[1]==1)? true : false));
+define('mcd_ADD_QUERY_VARS', $add_query_vars);
+define('mcd_SWITCH_TEMPLATE', $switch_template);
+define('mcd_SWITCH_THEME', $switch_theme);
 
 /* init */
-function MCD_init(){
-
+function mcd_init(){
+	
+	if(mcd_ADD_QUERY_VARS){
+		add_filter('query_vars', 'mcd_add_vars');
+		add_filter('wp_head', 'mcd_set_vars');
+	}
+	
+	/* if debug mode is enabled */
+	if(!is_admin() && mcd_DEBUG_OUTPUT){add_action('wp_footer', 'mcd_debug_output');}
+	
+	/* add options page for admins */
+	if(is_admin()){add_action('admin_menu', 'mcd_plugin_menu');}
+	
 }
 
 /* add a query var to wp router */
-function MCD_add_vars($query_vars){
+function mcd_add_vars($query_vars){
 	$query_vars[] = 'platform';
 	$query_vars[] = 'browser';
 	return $query_vars;
 }
 
 /* just before the theme is loaded */
-function MCD_set_vars(){
+function mcd_set_vars(){
 	
 	global $wp_query;
+	
+	/* get option index 0 */
+	$mcd_options = mcd_get_option();
+	if((int)$mcd_options[0]==1){$general_output=true;}
 	
 	/* Stage 1: Platform Detection - supports several desktop platforms as well */
 	$ua = trim(strtolower($_SERVER['HTTP_USER_AGENT']));
@@ -73,7 +89,7 @@ function MCD_set_vars(){
 		case 'android 3':
 		case 'ipad':
 		case 'kindle':
-			if(MCD_GENERAL_ONLY){$platform='tablet';}
+			if($general_output){$platform='tablet';}
 			break;
 		case 'android 2':
 		case 'android 1':
@@ -85,7 +101,7 @@ function MCD_set_vars(){
 		case 'palm':
 		case 'symbian':
 		case 'googlebot-mobile':
-			if(MCD_GENERAL_ONLY){$platform='mobile';}
+			if($general_output){$platform='mobile';}
 			break;
 		
 		/* desktop platforms */
@@ -97,7 +113,7 @@ function MCD_set_vars(){
 		case 'ppx mac os x':
 		case 'intel mac os x':
 		case 'googlebot':
-			if(MCD_GENERAL_ONLY){$platform='desktop';}
+			if($general_output){$platform='desktop';}
 			break;
 		
 		/* in case nothing else matches */
@@ -117,7 +133,7 @@ function MCD_set_vars(){
 		case 'iemobile':
 		case 'mobile safari':
 		case 'googlebot-mobile':
-			if(MCD_GENERAL_ONLY){$browser='mobile';}
+			if($general_output){$browser='mobile';}
 			break;
 		
 		/* desktop browsers */
@@ -131,13 +147,13 @@ function MCD_set_vars(){
 		case 'camino':
 		case 'firefox':
 		case 'safari':
-			if(MCD_GENERAL_ONLY){$browser='desktop';}
+			if($general_output){$browser='desktop';}
 			break;
 		
 		/* desktop bots */
 		case 'w3c_validator':
 		case 'googlebot':
-			if(MCD_GENERAL_ONLY){$browser='bot';}
+			if($general_output){$browser='bot';}
 			break;
 		
 		/* this catches all bots added to the regex but not the switch */
@@ -148,58 +164,141 @@ function MCD_set_vars(){
 	
 }
 
-function mcd_footer_callback($content){
-	
-	/* getting query_vars */
-	if(get_query_var('platform')){$platform = get_query_var('platform');}
-	if(get_query_var('browser')){$browser = get_query_var('browser');}
-	
+function mcd_debug_output(){
+	$mcd_options = mcd_get_option();
+	if((int)$mcd_options[1]==1){
+		
+		/* getting query_vars */
+		if(get_query_var('platform')){$platform = get_query_var('platform');}
+		if(get_query_var('browser')){$browser = get_query_var('browser');}
+		
 		switch($platform){
 			
 			/* phones */
-			case 'mobile':						$tag = 'Mobile';break;
 			case 'android 1':
-			case 'android 2':					$tag = 'Android (Phone)';break;
-			case 'blackberry':				$tag = 'BlackBerry';break;
+			case 'android 2':				$tag = 'Android (Phone)';break;
+			case 'blackberry':			$tag = 'BlackBerry';break;
 			case 'iphone':
-			case 'ipod':							$tag = 'Apple (Phone)';break;
-			case 'iemobile':					$tag = 'mobile IE';break;
-			case 'webos':							$tag = 'webOS';break;
+			case 'ipod':						$tag = 'Apple (Phone)';break;
+			case 'iemobile':				$tag = 'mobile IE';break;
+			case 'webos':						$tag = 'webOS';break;
+			case 'mobile':					$tag = 'General Mobile';break;
 			
 			/* tablets */
-			case 'tablet':						$tag = 'Tablet';break;
 			case 'android 3':
-			case 'android 4':					$tag = 'Android (Tablet)';break;
-			case 'ipad':							$tag = 'Apple (Tablet)';break;
+			case 'android 4':				$tag = 'Android (Tablet)';break;
+			case 'ipad':						$tag = 'Apple (Tablet)';break;
+			case 'kindle':					$tag = 'Kindle (Tablet)';break;
+			case 'tablet':					$tag = 'General Tablet';break;
+			
 			/* desktop clients */
-			case 'windows':						$tag = 'Windows x86';break;
 			case 'wow64':
-			case 'win64':							$tag = 'Windows x64';break;
-			case 'macintosh':					$tag = 'Macintosh';break;
-			case 'ppx mac os x':			$tag = 'PPC OSX';break;
-			case 'intel mac os x':		$tag = 'Intel OSX';break;
-			case 'desktop':						$tag = 'Desktop';break;
+			case 'win64':						$tag = 'Windows x64';break;
+			case 'windows':					$tag = 'Windows x86';break;
+			case 'macintosh':				$tag = 'Macintosh';break;
+			case 'ppx mac os x':		$tag = 'PPC OSX';break;
+			case 'intel mac os x':	$tag = 'Intel OSX';break;
+			case 'desktop':					$tag = 'General Desktop';break;
 			
 			/* bots */
 			case 'googlebot':
 			case 'googlebot-mobile':
-			case 'w3c_validator':			$tag = 'Bot';
-																break;
+			case 'w3c_validator':		$tag = 'Bot';
+															break;
 			
 			/* this case will not happen - since the query_var defaults to desktop */
 			default:							$tag = $platform;break;
+			
 		}
-	
-	$html =	'<span style="color:#FCFCFC;height:16px;margin-top:-16px;display:block;">
-						&raquo; You are currently viewing the '.$tag.' version of this blog ('.$browser.') &laquo;</span>';
-	// $html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
-	echo $html;
+		
+		$html =	'<span style="color:#FCFCFC;height:16px;margin-top:-16px;display:block;">
+							&raquo; You are currently viewing the '.$tag.' version of this blog ('.$browser.') &laquo;</span>';
+		// $html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
+		echo $html;
+	}
+/*
+    [0] => 1
+    [1] => 1
+    [2] => 0
+    [mcd_options] => 
+*/
 }
 
-add_action('init', 'MCD_init');
-add_filter('query_vars', 'MCD_add_vars');
-add_filter('wp_head', 'MCD_set_vars');
-if(MCD_FOOTER_OUTPUT && !is_admin()){
-	add_action('wp_footer', 'mcd_footer_callback');
+function mcd_plugin_menu() {
+	add_options_page('MCD Options', 'Client Detection', 'manage_options', 'mcd_plugin', 'mcd_options_page_hook');
 }
+
+function mcd_options_page_hook(){
+	
+	if(!current_user_can( 'manage_options')){die (__( "You don't have sufficient privileges to display this page", 'mcd_plugin' ) );}
+	
+	?>
+	<div class="wrap">
+		<div class="icon32" id="icon-options-general"></div>
+		<h2><a href="http://www.codefx.biz/donations"><?php echo __('Mobile Client Detection', 'mcd_plugin');?></a></h2>
+		<div class="su-tabs">
+		<?php
+		if($_POST){
+			/* update options */
+			$mcd_options = array((int)$_POST['general_results'],(int)$_POST['debug_output'],(int)$_POST['mcd_mode']);
+			update_option('mcd_options',$mcd_options);
+		}
+		else {
+			
+			/* get options */
+			$mcd_options = mcd_get_option();
+		}
+		?>
+		<form method="post" action="options-general.php?page=mcd_plugin">
+			<fieldset>
+				
+				<h3>General Results (mobile,desktop,tablet):</h3>
+				<select id="general_results" name="general_results">
+					<option value="1"<?php echo(($mcd_options[0]==1)?' selected="selected"':'');?>>Yes</option>
+					<option value="0"<?php echo(($mcd_options[0]==0)?' selected="selected"':'');?>>No</option>
+				</select>
+				<br/>
+				
+				<h3>Debug Output in Footer:</h3>
+				<select id="debug_output" name="debug_output">
+					<option value="1"<?php echo(($mcd_options[1]==1)?' selected="selected"':'');?>>Yes</option>
+					<option value="0"<?php echo(($mcd_options[1]==0)?' selected="selected"':'');?>>No</option>
+				</select>
+				<br/>
+				
+				<h3>Modus operandi:</h3>
+				<select id="mcd_mode" name="mcd_mode">
+					<option value="0"<?php echo(($mcd_options[2]==0)?' selected="selected"':'');?>>Enable query_vars only</option>
+					<option value="1"<?php echo(($mcd_options[2]==1)?' selected="selected"':'');?>>Load a custom template file</option>
+					<option value="2"<?php echo(($mcd_options[2]==2)?' selected="selected"':'');?>>Load a custom theme directory</option>
+				</select>
+				<br/>
+				<p>Custom templates & themes are not yet implemented.</p>
+			</fieldset>
+			<p class="submit">
+				<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+			</p>
+			</form>
+		</div>
+	</div>
+	<?php
+}
+
+function mcd_get_option( $name = NULL ){
+	$options = get_option('mcd_options');
+	if($options === FALSE){
+		add_option('mcd_options',array(0,1,0));
+	}
+	if(is_null($name)){
+		return get_option('mcd_options');
+	}
+	elseif(isset($options[$name])){
+		return $options[$name];
+	}
+	else {
+		return FALSE;
+	}
+}
+
+add_action('init', 'mcd_init');
 ?>

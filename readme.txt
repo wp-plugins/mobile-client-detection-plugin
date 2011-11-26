@@ -2,7 +2,7 @@
 
 Contributors: syslogic
 Donate link: http://www.codefx.biz/donations
-Tags: plugin, mobile, phone, tablet, template, theme, detect, query_var, layout, page speed, platform, browser, google, android, iphone
+Tags: plugin, mobile, phone, tablet, theme, detect, query_var, layout, switch, page speed, platform, browser
 Requires at least: 3.0.0
 Tested up to: 3.2.1
 Stable tag: 0.2
@@ -64,28 +64,29 @@ c)
 w3c_validator, googlebot (or general: bot)
 
 = Does this plugin have any options ? =
-There’s currently 2 options:
-$general_only = true/false – return only 'mobile', 'desktop' or 'tablet'
-$footer_output = true/false – append output to footer (good for testing purposes)
+You can find the options in the menu under Settings -> Client Detection.
 
 = Which features will be implemented next ? =
-a) add option toggles to the admin panel
-b) add template-switching by filename capability
+a) add template-switching capability
+b) add theme-switching capability
 
 == Screenshots ==
 
 There are currently no screenshots – since the settings page does not exist yet.
 
 == Changelog ==
+= 0.7 =
+* Plugin options page added.
+
 = 0.6 =
-* Tablet detection added (thanks to Mystech)
-* Android & IE Version detection added
-* Mobile Safari detection fixed
-* readme.txt updated
+* Tablet detection added (thanks to Mystech).
+* Android & IE Version detection added.
+* Mobile Safari detection fixed.
+* readme.txt updated.
 
 = 0.5 =
-* Support for Kindle & Symbian added
-* Browser detection added
+* Support for Kindle & Symbian added.
+* Browser detection added.
 
 = 0.4 =
 * 'Footer Output' option added.
