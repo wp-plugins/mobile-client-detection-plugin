@@ -1,6 +1,6 @@
 <?php
+	/* Template Name: Mobile Client Detection Example */
 	/*
-		Mobile Client Detection Plug-In usage example
 		this is an example how provided query_var 'platform' and 'browser' can be used in your theme
 		
 		- place this code into your theme (e.g. functions.php, index.php, header.php)
