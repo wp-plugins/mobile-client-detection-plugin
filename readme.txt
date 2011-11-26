@@ -1,4 +1,4 @@
-=== Mobile Client Detection Plug-in ===
+=== Mobile Client Detection Plugin ===
 
 Contributors: syslogic
 Donate link: http://www.codefx.biz/donations
