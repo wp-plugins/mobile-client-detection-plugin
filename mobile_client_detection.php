@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Mobile Client Detection Plug-in
 	Plugin URI: http://wordpress.org/extend/plugins/mobile-client-detection-plugin/
-	Description: The Mobile Client Detection Plug-in provies the query_vars 'platform' & 'browser' to your theme.
+	Description: The Mobile Client Detection Plug-in provides query_vars 'platform' & 'browser' for simply switching the layout within your theme (requires editing template files). It can also be very helpful when it’s required to load different versions of CSS/JS code.
 	Author: Martin Zeitler
 	Version: 0.5
 	Tags: plugin, mobile, theme, detect, query_var, layout, switch, page speed, platform, browser
@@ -56,22 +56,27 @@ function MCD_set_vars(){
 	
 	/* Stage 1: Platform Detection - supports several desktop platforms as well */
 	$ua = trim(strtolower($_SERVER['HTTP_USER_AGENT']));
-	$pattern = '/(android|blackberry|ip(hone|ad|od)|iemobile|webos|palm|symbian|kindle|windows|win64|wow64|macintosh|intel\smac\sos\sx|ppx\smac\sos\sx|googlebot|googlebot-mobile)/';
+	$pattern = '/(android\s\d|blackberry|ip(hone|ad|od)|iemobile|webos|palm|symbian|kindle|windows|win64|wow64|macintosh|intel\smac\sos\sx|ppx\smac\sos\sx|googlebot|googlebot-mobile)/';
 	if(preg_match($pattern,$ua,$matches)){$platform=$matches[0];}
 	
 	switch($platform){
 		
 		/* mobile platforms */
-		case 'android':
-		case 'blackberry':
+		case 'android 4':
+		case 'android 3':
 		case 'ipad':
+		case 'kindle':
+			if(MCD_GENERAL_ONLY){$platform='tablet';}
+			break;
+		case 'android 2':
+		case 'android 1':
+		case 'blackberry':
 		case 'iphone':
 		case 'ipod':
 		case 'iemobile':
 		case 'webos':
 		case 'palm':
 		case 'symbian':
-		case 'kindle':
 		case 'googlebot-mobile':
 			if(MCD_GENERAL_ONLY){$platform='mobile';}
 			break;
@@ -186,17 +191,6 @@ function mcd_footer_callback($content){
 	
 	$html =	'<span style="color:#FCFCFC;height:16px;margin-top:-16px;display:block;">
 						&raquo; You are currently viewing the '.$tag.' version of this blog ('.$browser.') &laquo;</span>';
-	$html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
-	echo $html;
-}
-
-add_action('init', 'MCD_init');
-add_filter('query_vars', 'MCD_add_vars');
-add_filter('wp_head', 'MCD_set_vars');
-if(MCD_FOOTER_OUTPUT && !is_admin()){
-	add_action('wp_footer', 'mcd_footer_callback');
-}
-?> You are currently viewing the '.$tag.' version of this blog ('.$browser.') &laquo;</span>';
 	$html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
 	echo $html;
 }
