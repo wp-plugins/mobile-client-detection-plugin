@@ -201,12 +201,6 @@ function mcd_debug_output(){
 		// $html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
 		echo $html;
 	}
-/*
-    [0] => 1
-    [1] => 1
-    [2] => 0
-    [mcd_options] => 
-*/
 }
 
 function mcd_plugin_menu() {
@@ -220,7 +214,7 @@ function mcd_options_page_hook(){
 	?>
 	<div class="wrap">
 		<div class="icon32" id="icon-options-general"></div>
-		<h2><a href="http://www.codefx.biz/donations"><?php echo __('Mobile Client Detection','mcd_plugin');?></a></h2>
+		<h2><?php echo __('Mobile Client Detection','mcd_plugin');?></h2>
 		<div class="su-tabs">
 		<?php
 		if($_POST){
