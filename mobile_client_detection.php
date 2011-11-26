@@ -30,12 +30,19 @@
 /* configuration options */
 $general_only = false;
 $footer_output = true;
-	
+
+/* not yet implememted */
+$switch_template = false;
+$switch_theme = false;
+
+
 if(!defined('WP_PLUGIN_DIR')){die();}
 define('MCD_PLUGIN_DIR', WP_PLUGIN_DIR.'/'.plugin_basename(dirname( __FILE__)));
 define('MCD_PLUGIN_URL', WP_PLUGIN_URL.'/'.plugin_basename(dirname( __FILE__)));
 define('MCD_GENERAL_ONLY', $general_only);
 define('MCD_FOOTER_OUTPUT', $footer_output);
+define('MCD_SWITCH_TEMPLATE', $switch_template);
+define('MCD_SWITCH_THEME', $switch_theme);
 
 /* init */
 function MCD_init(){
@@ -150,53 +157,37 @@ function mcd_footer_callback($content){
 		switch($platform){
 			
 			/* phones */
-			case 'mobile':						$tag = 'Mobile';
-																break;
-			case 'android 1':					
-			case 'android 2':					$tag = 'Android (Phone)';
-																break;
-			case 'blackberry':				$tag = 'BlackBerry';
-																break;
+			case 'mobile':						$tag = 'Mobile';break;
+			case 'android 1':
+			case 'android 2':					$tag = 'Android (Phone)';break;
+			case 'blackberry':				$tag = 'BlackBerry';break;
 			case 'iphone':
-			case 'ipod':							$tag = 'Apple (Phone)';
-																break;
-			case 'iemobile':					$tag = 'mobile IE';
-																break;
-			case 'webos':							$tag = 'webOS';
-																break;
+			case 'ipod':							$tag = 'Apple (Phone)';break;
+			case 'iemobile':					$tag = 'mobile IE';break;
+			case 'webos':							$tag = 'webOS';break;
 			
 			/* tablets */
-			case 'tablet':						$tag = 'Tablet';
-																break;
+			case 'tablet':						$tag = 'Tablet';break;
 			case 'android 3':
-			case 'android 4':					$tag = 'Android (Tablet)';
-																break;
-			case 'ipad':							$tag = 'Apple (Tablet)';
-																break;
+			case 'android 4':					$tag = 'Android (Tablet)';break;
+			case 'ipad':							$tag = 'Apple (Tablet)';break;
 			/* desktop clients */
-			case 'windows':						$tag = 'Windows';
-																break;
+			case 'windows':						$tag = 'Windows x86';break;
 			case 'wow64':
-			case 'win64':							$tag = 'Windows 64-bit';
-																break;
-			case 'macintosh':					$tag = 'Macintosh';
-																break;
-			case 'ppx mac os x':			$tag = 'PPC OSX';
-																break;
-			case 'intel mac os x':		$tag = 'Intel OSX';
-																break;
-			case 'desktop':						$tag = 'Desktop';
-																break;
+			case 'win64':							$tag = 'Windows x64';break;
+			case 'macintosh':					$tag = 'Macintosh';break;
+			case 'ppx mac os x':			$tag = 'PPC OSX';break;
+			case 'intel mac os x':		$tag = 'Intel OSX';break;
+			case 'desktop':						$tag = 'Desktop';break;
 			
 			/* bots */
-			case 'googlebot':					$tag = 'Bot';
-																break;
-			case 'googlebot-mobile':	$tag = 'Bot';
+			case 'googlebot':
+			case 'googlebot-mobile':
+			case 'w3c_validator':			$tag = 'Bot';
 																break;
 			
 			/* this case will not happen - since the query_var defaults to desktop */
 			default:							$tag = $platform;break;
-			
 		}
 	
 	$html =	'<span style="color:#FCFCFC;height:16px;margin-top:-16px;display:block;">
