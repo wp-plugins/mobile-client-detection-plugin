@@ -51,7 +51,7 @@ since there’s pretty much any popular mobile platform covered.
 
 = Does this plugin have any options ? =
 There’s currently 2 options:
-$general_only = true/false – return only 'mobile' or 'desktop' instead of detail info
+$general_only = true/false – return only 'mobile', 'desktop' or 'tablet'
 $footer_output = true/false – append output to footer (good for testing purposes)
 
 The next version might add settings to the admin panel…
@@ -61,6 +61,10 @@ The next version might add settings to the admin panel…
 There are no screenshots – since this plugin has no output.
 
 == Changelog ==
+= 0.6 =
+* Tablet detection added (thanks to Mystech)
+* Android & IE Version detection added
+
 = 0.5 =
 * Support for Kindle & Symbian added
 * Browser detection added
