@@ -196,4 +196,15 @@ add_filter('wp_head', 'MCD_set_vars');
 if(MCD_FOOTER_OUTPUT && !is_admin()){
 	add_action('wp_footer', 'mcd_footer_callback');
 }
+?> You are currently viewing the '.$tag.' version of this blog ('.$browser.') &laquo;</span>';
+	$html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
+	echo $html;
+}
+
+add_action('init', 'MCD_init');
+add_filter('query_vars', 'MCD_add_vars');
+add_filter('wp_head', 'MCD_set_vars');
+if(MCD_FOOTER_OUTPUT && !is_admin()){
+	add_action('wp_footer', 'mcd_footer_callback');
+}
 ?>
