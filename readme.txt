@@ -56,11 +56,11 @@ since there’s pretty much any popular mobile platform covered.
 
 = Which values can the query_var 'browser' return ? =
 Currently it returns the tag for each known browser:
-a)
+a) 
 fennec, iemobile, mobile safari, googlebot-mobile (or general: mobile).
-b)
+b) 
 msie 5,msie 6, msie 7, msie 8, msie 9, chrome, camino, firefox, safari (or general: desktop)
-c)
+c) 
 w3c_validator, googlebot (or general: bot)
 
 = Does this plugin have any options ? =
@@ -68,7 +68,9 @@ There’s currently 2 options:
 $general_only = true/false – return only 'mobile', 'desktop' or 'tablet'
 $footer_output = true/false – append output to footer (good for testing purposes)
 
-The next version might add settings to the admin panel…
+= Which features will be implemented next ? =
+a) add option toggles to the admin panel
+b) add template switching by filename capability
 
 == Screenshots ==
 
