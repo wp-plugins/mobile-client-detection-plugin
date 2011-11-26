@@ -68,7 +68,7 @@ There’s currently 2 options:
 $general_only = true/false – return only 'mobile', 'desktop' or 'tablet'
 $footer_output = true/false – append output to footer (good for testing purposes)
 
-= Which features will be implemented next ? =
+= Do we have any roadmap ? =
 a) add option toggles to the admin panel
 b) add template-switching by filename capability
 
