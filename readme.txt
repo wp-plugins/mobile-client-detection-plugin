@@ -73,7 +73,7 @@ b) theme-switching capability by type/device
 
 == Screenshots ==
 
-There are currently no screenshots.
+1. Currently there's only two options available.
 
 == Changelog ==
 = 0.7 =
