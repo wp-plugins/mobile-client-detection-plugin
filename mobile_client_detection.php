@@ -101,25 +101,25 @@ function MCD_set_vars(){
 	$wp_query->set('platform',$platform);
 	
 	/* Stage 2: Browser Detection */
-	$pattern = '/(firefox|fennec|msie\s5\.0|msie\s6\.0|msie\s7\.0|msie\s8\.0|msie\s9\.0|msie\s10\.0|iemobile|chrome|safari\smobile|safari|camino|googlebot|googlebot-mobile|w3c_validator)/';
+	$pattern = '/(firefox|fennec|msie\s5|msie\s6|msie\s7|msie\s8|msie\s9|msie\s10|iemobile|chrome|mobile\ssafari|safari|camino|googlebot|googlebot-mobile|w3c_validator)/';
 	if (preg_match($pattern, $ua, $matches)){$browser=$matches[0];}
 	switch($browser){
 		
 		/* mobile browsers */
 		case 'fennec':
 		case 'iemobile':
-		case 'safari mobile':
+		case 'mobile safari':
 		case 'googlebot-mobile':
 			if(MCD_GENERAL_ONLY){$browser='mobile';}
 			break;
 		
 		/* desktop browsers */
-		case 'msie 5.0':
-		case 'msie 6.0':
-		case 'msie 7.0':
-		case 'msie 8.0':
-		case 'msie 9.0':
-		case 'msie 10.0':
+		case 'msie 5':
+		case 'msie 6':
+		case 'msie 7':
+		case 'msie 8':
+		case 'msie 9':
+		case 'msie 10':
 		case 'chrome':
 		case 'camino':
 		case 'firefox':
@@ -199,7 +199,7 @@ function mcd_footer_callback($content){
 	
 	$html =	'<span style="color:#FCFCFC;height:16px;margin-top:-16px;display:block;">
 						&raquo; You are currently viewing the '.$tag.' version of this blog ('.$browser.') &laquo;</span>';
-	$html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
+	// $html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
 	echo $html;
 }
 
