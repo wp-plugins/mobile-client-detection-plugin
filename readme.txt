@@ -73,7 +73,7 @@ b) theme-switching capability by type/device
 
 == Screenshots ==
 
-There are currently no screenshots – since the settings page does not exist yet.
+There are currently no screenshots.
 
 == Changelog ==
 = 0.7 =
