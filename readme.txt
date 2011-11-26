@@ -73,7 +73,7 @@ b) theme-switching capability by type/device
 
 == Screenshots ==
 
-1. Currently there's only two options available.
+1. Currently there's only option 'General Results' and 'Debug Output' available.
 
 == Changelog ==
 = 0.7 =
