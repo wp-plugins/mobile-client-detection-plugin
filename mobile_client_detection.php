@@ -40,10 +40,10 @@ function mcd_init(){
 	/* if debug mode is enabled */
 	$mcd_options = mcd_get_option();
 	if((int)$mcd_options[1]==1){$debug_output=true;}
-	if(!is_admin() && $debug_output){add_action('wp_footer', 'mcd_debug_output');}
+	if(!is_admin() && $debug_output){add_action('wp_footer','mcd_debug_output');}
 	
-	/* add options page for admins */
-	if(is_admin()){add_action('admin_menu', 'mcd_plugin_menu');}
+	/* hook options page for admins only */
+	if(is_admin() && current_user_can('manage_options')){add_action('admin_menu','mcd_plugin_menu');}
 }
 
 /* add a query var to wp router */
@@ -53,7 +53,7 @@ function mcd_add_vars($query_vars){
 	return $query_vars;
 }
 
-/* just before the theme is loaded */
+/* the actual regex detection happens here */
 function mcd_set_vars(){
 	
 	global $wp_query;
