@@ -64,7 +64,7 @@ c)
 w3c_validator, googlebot (or general: bot)
 
 = Does this plugin have any options ? =
-You can find the options in the menu under Settings -> Client Detection.
+You can find the options in the menu under Settings > Client Detection.
 Template & theme switching has not been implemented yet.
 
 = Which further core features will be implemented until v1.0 ? =
