@@ -39,18 +39,18 @@ which can be used to load different template file (not yet implemented) – or t
 
 = Which values can the query_var 'platform' return ? =
 Currently it returns the tag for each known platform:
-a) android 1, android 2, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or general: mobile).
-b) android 3,android 4, ipad, kindle (or general: tablet).
-c) windows, win64, wow64, macintosh, ppx mac os x, intel mac os x (or general: desktop).
+1. android 1, android 2, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or general: mobile).
+2. android 3,android 4, ipad, kindle (or general: tablet).
+3. windows, win64, wow64, macintosh, ppx mac os x, intel mac os x (or general: desktop).
 
 The value 'desktop' can be (most likely) considered as a desktop PC -
 since there’s pretty much any popular mobile platform covered.
 
 = Which values can the query_var 'browser' return ? =
 Currently it returns the tag for each known browser:
-a) fennec, iemobile, mobile safari, googlebot-mobile (or general: mobile).
-b) msie 5,msie 6, msie 7, msie 8, msie 9, chrome, camino, firefox, safari (or general: desktop)
-c) w3c_validator, googlebot (or general: bot)
+1. fennec, iemobile, mobile safari, googlebot-mobile (or general: mobile).
+2. msie 5,msie 6, msie 7, msie 8, msie 9, chrome, camino, firefox, safari (or general: desktop)
+3. w3c_validator, googlebot (or general: bot)
 
 = Does this plugin have any options ? =
 You can find the options in the menu under Settings > Client Detection:
