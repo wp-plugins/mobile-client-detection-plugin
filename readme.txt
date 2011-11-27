@@ -18,10 +18,19 @@ In case the mobile version of your blog shall have a different layout
 or if you need to load alternate CSS/JS files for a specific browsers:
 This plug-in provides the required variable for serving a customized version of your theme!!
 
-Currently it can detect the following mobile platforms: Android Phones and Tablets,
-Blackberry, iPad, iPhone, iPod, IE mobile, Kindle, SymbianOS, PalmOS, webOS and GoogleBot mobile.
+Currently it can detect the following mobile platforms:
+1. Android Phones (Android 1.x & 2.x)
+2. Android Tablets (Android 3.x & 4.x),
+3. Blackberry
+4. iPad, iPhone, iPod
+5. IE mobile
+6. Kindle
+7. SymbianOS
+8. PalmOS
+9. webOS
+10. GoogleBot mobile.
 
-Internet Explorer & Android version detection are supported -
+It also can detect several desktop platforms (e.g. Internet Explorer)
 so it's quite handy for fixing things for specific user-agents
 (instead of using conditional CSS).
 
@@ -39,8 +48,8 @@ which can be used to load different template file (not yet implemented) – or t
 
 = Which values can the query_var 'platform' return ? =
 Currently it returns the tag for each known platform:
-1. android 1, android 2, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or general: mobile).
-2. android 3,android 4, ipad, kindle (or general: tablet).
+1. android-phone, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or general: mobile).
+2. android-tablet, ipad, kindle (or general: tablet).
 3. windows, win64, wow64, macintosh, ppx mac os x, intel mac os x (or general: desktop).
 
 The value 'desktop' can be (most likely) considered as a desktop PC -
@@ -62,7 +71,7 @@ You can find the options in the menu under Settings > Client Detection:
 1. checking for existance of wrapped template files.
 2. attempt to overload the wrapped template paths.
 
-Hint: Currently the wrapped paths get shown - but not loaded yet.
+Hint: Currently the arrays get shown in debug output - but not loaded yet...
 
 == Screenshots ==
 
