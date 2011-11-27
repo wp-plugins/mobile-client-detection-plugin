@@ -52,8 +52,8 @@ function mcd_init(){
 		if((int)$mcd_options[2]==2){$load_theme=true;}
 		
 		if($load_template){
-			// add_filter('template_include', 'mcd_load_template', 1, 1);
-			// add_action('template_redirect','mcd_load_template');
+			//add_filter('template_include', 'mcd_load_template', 1, 1);
+			//add_action('template_redirect','mcd_load_template');
 		}
 		
 		/* if loading themes is enabled: */
