@@ -66,8 +66,8 @@ Hint: Currently the wrapped paths get shown - but not loaded yet.
 
 == Screenshots ==
 
-1. Currently there's 'General Results' and 'Debug Output' available.
-2. Debug Output shows how the template paths get wrapped.
+1. Options 'General Results' and 'Debug Output' are currently available.
+2. The Debug Output shows how the template paths get wrapped.
 
 == Changelog ==
 
