@@ -39,15 +39,9 @@ which can be used to load different template file (not yet implemented) – or t
 
 = Which values can the query_var 'platform' return ? =
 Currently it returns the tag for each known platform:
-a)
-android 1, android 2, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile
-(or general: mobile).
-b)
-android 3,android 4, ipad, kindle
-(or general: tablet).
-c)
-windows, win64, wow64, macintosh, ppx mac os x, intel mac os x
-(or general: desktop).
+a) android 1, android 2, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or general: mobile).
+b) android 3,android 4, ipad, kindle (or general: tablet).
+c) windows, win64, wow64, macintosh, ppx mac os x, intel mac os x (or general: desktop).
 
 Set option $general_only=true; in case you require the general result.
 
@@ -56,28 +50,34 @@ since there’s pretty much any popular mobile platform covered.
 
 = Which values can the query_var 'browser' return ? =
 Currently it returns the tag for each known browser:
-a) 
-fennec, iemobile, mobile safari, googlebot-mobile (or general: mobile).
-b) 
-msie 5,msie 6, msie 7, msie 8, msie 9, chrome, camino, firefox, safari (or general: desktop)
-c) 
-w3c_validator, googlebot (or general: bot)
+a) fennec, iemobile, mobile safari, googlebot-mobile (or general: mobile).
+b) msie 5,msie 6, msie 7, msie 8, msie 9, chrome, camino, firefox, safari (or general: desktop)
+c) w3c_validator, googlebot (or general: bot)
 
 = Does this plugin have any options ? =
 You can find the options in the menu under Settings > Client Detection.
 Template & theme switching has not been implemented yet.
 
 = Which further core features will be implemented until v1.0 ? =
-a) template-switching capability by type/device
-b) theme-switching capability by type/device
+1. checking for existance of wrapped template files.
+2. attempt to overloading the wrapped template paths.
 
 == Screenshots ==
 
-1. Currently there's only option 'General Results' and 'Debug Output' available.
+1. Currently there's 'General Results' and 'Debug Output' available.
+2. Debug Output shows how the template paths get wrapped.
 
 == Changelog ==
+
+= 0.7.2 =
+* Theme / Template detection by regex added.
+* path-wrapping per platform is working.
+* Debug output extended by generated paths.
+
 = 0.7 =
 * Basic options page added.
+* option 'General Results' added.
+* option 'Debug Output' added.
 
 = 0.6 =
 * Tablet detection added (thanks to Mystech).
