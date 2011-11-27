@@ -62,10 +62,12 @@ Currently it returns the tag for each known browser:
 3. w3c_validator, googlebot (or general: bot)
 
 = Does this plugin have any options ? =
-You can find the options in the menu under Settings > Client Detection:
 1. 'General Only': Yes/No - limit results to mobile, tablet, deskop, bot
 2. 'Debug Output': Yes/No - append debug output to the footer on front-end
 3. 'Modus Operandi': Standard/Template overloading/Theme overloading - not implemented yet.
+
+= Where can I find these options ? =
+You can find the options in the menu under Settings > Client Detection.
 
 = Which further core features will be implemented until v1.0 ? =
 1. checking for existance of wrapped template files.
@@ -74,7 +76,6 @@ You can find the options in the menu under Settings > Client Detection:
 Hint: Currently the arrays get shown in debug output - but not loaded yet...
 
 == Screenshots ==
-
 1. Options 'General Results' and 'Debug Output' are currently available.
 2. The Debug Output shows how the template paths get wrapped dynamically.
 
