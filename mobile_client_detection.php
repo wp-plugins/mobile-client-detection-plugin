@@ -58,7 +58,7 @@ function mcd_init(){
 		
 		/* if loading themes is enabled: */
 		if($load_theme){
-			add_action('template_redirect','mcd_load_theme');
+			//add_filter('template_include', 'mcd_load_theme', 1, 1);
 		}
 	}
 	/* hook options page for admins only */
