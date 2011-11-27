@@ -4,7 +4,7 @@
 	Plugin URI: http://wordpress.org/extend/plugins/mobile-client-detection-plugin/
 	Description: The Mobile Client Detection Plugin provides query_vars 'platform' & 'browser'. It can also be very helpful when it’s required to load different versions of CSS/JS code.
 	Author: Martin Zeitler
-	Version: 0.7.2
+	Version: 0.7.4
 	Tags: plugin, mobile, theme, detect, query_var, layout, switch, page speed, platform, browser
 	Author URI: http://www.codefx.biz
 */
@@ -46,69 +46,92 @@ function mcd_init(){
 	if(!is_admin() && $debug_output){add_action('wp_footer','mcd_debug_output');}
 	
 	if ( defined('WP_USE_THEMES') && WP_USE_THEMES ){
+		
 		/* if loading template is enabled: */
 		if((int)$mcd_options[2]==1){$load_template=true;}
-		if($load_template){add_action('template_redirect','mcd_load_template');}
+		if((int)$mcd_options[2]==2){$load_theme=true;}
+		
+		if($load_template){
+			// add_filter('template_include', 'mcd_load_template', 1, 1);
+			// add_action('template_redirect','mcd_load_template');
+		}
 		
 		/* if loading themes is enabled: */
-		if((int)$mcd_options[2]==2){$load_theme=true;}
-		if($load_template){add_action('template_redirect','mcd_load_theme');}
+		if($load_theme){
+			add_action('template_redirect','mcd_load_theme');
+		}
 	}
 	/* hook options page for admins only */
 	if(is_admin() && current_user_can('manage_options')){add_action('admin_menu','mcd_plugin_menu');}
 }
 
+/* get [0]theme_path, [1]theme_name, [2]template_name as array */
 function mcd_get_theme() {
 	
 	/* some code from wp core */
 	global $wp_query;
 	$template = false;
-	if     ( is_404()            && $template = get_404_template()            ) :
-	elseif ( is_search()         && $template = get_search_template()         ) :
-	elseif ( is_tax()            && $template = get_taxonomy_template()       ) :
-	elseif ( is_front_page()     && $template = get_front_page_template()     ) :
-	elseif ( is_home()           && $template = get_home_template()           ) :
-	elseif ( is_attachment()     && $template = get_attachment_template()     ) :
-	elseif ( is_single()         && $template = get_single_template()         ) :
-	elseif ( is_page()           && $template = get_page_template()           ) :
-	elseif ( is_category()       && $template = get_category_template()       ) :
-	elseif ( is_tag()            && $template = get_tag_template()            ) :
-	elseif ( is_author()         && $template = get_author_template()         ) :
-	elseif ( is_date()           && $template = get_date_template()           ) :
-	elseif ( is_archive()        && $template = get_archive_template()        ) :
-	elseif ( is_comments_popup() && $template = get_comments_popup_template() ) :
-	elseif ( is_paged()          && $template = get_paged_template()          ) :
+	if    (is_404()            && $template = get_404_template()           ):
+	elseif(is_search()         && $template = get_search_template()        ):
+	elseif(is_tax()            && $template = get_taxonomy_template()      ):
+	elseif(is_front_page()     && $template = get_front_page_template()    ):
+	elseif(is_home()           && $template = get_home_template()          ):
+	elseif(is_attachment()     && $template = get_attachment_template()    ):
+	elseif(is_single()         && $template = get_single_template()        ):
+	elseif(is_page()           && $template = get_page_template()          ):
+	elseif(is_category()       && $template = get_category_template()      ):
+	elseif(is_tag()            && $template = get_tag_template()           ):
+	elseif(is_author()         && $template = get_author_template()        ):
+	elseif(is_date()           && $template = get_date_template()          ):
+	elseif(is_archive()        && $template = get_archive_template()       ):
+	elseif(is_comments_popup() && $template = get_comments_popup_template()):
+	elseif(is_paged()          && $template = get_paged_template()         ):
 	else :
 		$template = get_index_template();
 	endif;
 	
-	/* but here comes the extraction regex */
-	$pattern = '/\/(.*)\/(.*)\/(.*)\.php/i';
-	if(preg_match($pattern,$template,$arr)){
-		$theme_path=$arr[1];
-		$theme_name=$arr[2];
-		$template_name=$arr[3];
-		return array($theme_path,$theme_name,$template_name);
-	}
-	else {
-		return array();
-	}
+	/* but here comes the extraction regex: */
+	if(preg_match('/\/(.*)\/(.*)\/(.*)\.php/i',$template,$arr)){return $arr;}
 }
 
-function mcd_load_template() {
+/* template overloading - not implemented yet */
+function mcd_load_template($debug = false) {
 	global $wp_query;
-	
 	if(get_query_var('platform')){
+		
 		$platform = get_query_var('platform');
+		$theme = mcd_get_theme();
+		
+		$templates = array();
+		$templates[] = $theme[3].'-'.$platform.'.php';
+		
+		if($pagename){$templates[] = $theme[3]."-$pagename-".$platform.".php";}
+		if($id){$templates[] = $theme[3]."-$id-".$platform.".php";}
+		$templates[] = $theme[3].'.php';
+			
+		if($debug){return print_r($templates,true);}
+		return get_query_template( $theme[2], $templates );
 	}
-	return true;
 }
 
-function mcd_load_theme($platform) {
-	return true;
+/* theme overloading - not implemented yet */
+function mcd_load_theme($debug) {
+	global $wp_query;
+	if(get_query_var('platform')){
+		
+		$platform = get_query_var('platform');
+		$theme = mcd_get_theme();
+		
+		$templates = array();
+		$templates[] = $theme[2].'-'.$platform.'/'.$theme[3].'.php';
+		$templates[] = $theme[2].'/'.$theme[3].'.php';
+
+		if($debug){return print_r($templates,true);}
+		return get_query_template( $theme[2], $templates );
+	}
 }
 
-/* add a query var to wp router */
+/* adds the query_vars to WP_query */
 function mcd_add_vars($query_vars){
 	$query_vars[] = 'platform';
 	$query_vars[] = 'browser';
@@ -131,15 +154,9 @@ function mcd_set_vars(){
 	
 	switch($platform){
 		
-		/* mobile platforms */
-		case 'android 4':
-		case 'android 3':
-		case 'ipad':
-		case 'kindle':
-			if($general_output){$platform='tablet';}
-			break;
-		case 'android 2':
+		/* phones */
 		case 'android 1':
+		case 'android 2':
 		case 'blackberry':
 		case 'iphone':
 		case 'ipod':
@@ -151,8 +168,15 @@ function mcd_set_vars(){
 			if($general_output){$platform='mobile';}
 			break;
 		
-		/* desktop platforms */
-		/* ... */
+		/* tablets */
+		case 'android 3':
+		case 'android 4':
+		case 'ipad':
+		case 'kindle':
+			if($general_output){$platform='tablet';}
+			break;
+		
+		/* desktops */
 		case 'windows':
 		case 'win64':
 		case 'wow64':
@@ -168,6 +192,22 @@ function mcd_set_vars(){
 			$platform='desktop';
 			break;
 	}
+	
+	/* combining some platforms - required for template files */
+	switch($platform){
+		
+		case 'android 1':
+		case 'android 2':
+			if(!$general_output){$platform='android-phone';}
+			break;
+		
+		/* mobile platforms */
+		case 'android 3':
+		case 'android 4':
+			if(!$general_output){$platform='android-tablet';}
+			break;
+	}
+	
 	$wp_query->set('platform',$platform);
 	
 	/* Stage 2: Browser Detection */
@@ -211,74 +251,31 @@ function mcd_set_vars(){
 	
 }
 
-function mcd_debug_output(){
-	$mcd_options = mcd_get_option();
-	if((int)$mcd_options[1]==1){
-		
-		/* getting query_vars */
-		if(get_query_var('platform')){$platform = get_query_var('platform');}
-		if(get_query_var('browser')){$browser = get_query_var('browser');}
-		
-		switch($platform){
-			
-			/* phones */
-			case 'android 1':
-			case 'android 2':				$tag = 'Android (Phone)';break;
-			case 'blackberry':			$tag = 'BlackBerry';break;
-			case 'iphone':
-			case 'ipod':						$tag = 'Apple (Phone)';break;
-			case 'iemobile':				$tag = 'mobile IE';break;
-			case 'webos':						$tag = 'webOS';break;
-			case 'mobile':					$tag = 'General Mobile';break;
-			
-			/* tablets */
-			case 'android 3':
-			case 'android 4':				$tag = 'Android (Tablet)';break;
-			case 'ipad':						$tag = 'Apple (Tablet)';break;
-			case 'kindle':					$tag = 'Kindle (Tablet)';break;
-			case 'tablet':					$tag = 'General Tablet';break;
-			
-			/* desktop clients */
-			case 'wow64':
-			case 'win64':						$tag = 'Windows x64';break;
-			case 'windows':					$tag = 'Windows x86';break;
-			case 'macintosh':				$tag = 'Macintosh';break;
-			case 'ppx mac os x':		$tag = 'PPC OSX';break;
-			case 'intel mac os x':	$tag = 'Intel OSX';break;
-			case 'desktop':					$tag = 'General Desktop';break;
-			
-			/* bots */
-			case 'googlebot':
-			case 'googlebot-mobile':
-			case 'w3c_validator':		$tag = 'Bot';
-															break;
-			
-			/* this case will not happen - since the query_var defaults to desktop */
-			default:							$tag = $platform;break;
-			
-		}
-		
-		$theme = mcd_get_theme();
-		$html = '<div id="mcd_debug" style="width:420px;color:#FCFCFC;margin:auto;margin-top:-16px;cursor:default;">';
-		$html .='<ul style="list-style-type:none;margin-left:-30px">';
-		$html .='<li style="height:16px;">&raquo; This could be the '.$tag.' version of this blog ('.$browser.') &laquo;</li>';
-		$html .='<li style="height:16px;">Standard - Mode 0: /'.$theme[1].'/'.$theme[2].'.php'.(((int)$mcd_options[2]==0)?' (active)':'').'</li>';
-		$html .='<li style="height:16px;">Template - Mode 1: /'.$theme[1].'/'.$theme[2].'-'.$platform.'.php'.(((int)$mcd_options[2]==1)?' (active)':'').'</li>';
-		$html .='<li style="height:16px;">Theme - Mode 2: /'.$theme[1].'-'.$platform.'/'.$theme[2].'.php'.(((int)$mcd_options[2]==2)?' (active)':'').'</li>';
-		//$html .='<li style="float:left;height:16px;display:block;">('.$_SERVER['HTTP_USER_AGENT'].')</li>';
-		$html .='</ul></div>';
-		echo $html;
+/* get plugin options - or create them */
+function mcd_get_option($name = NULL){
+	$options = get_option('mcd_options');
+	if($options === FALSE){
+		add_option('mcd_options',array(0,1,0));
+	}
+	if(is_null($name)){
+		return get_option('mcd_options');
+	}
+	elseif(isset($options[$name])){
+		return $options[$name];
+	}
+	else {
+		return FALSE;
 	}
 }
 
+/* hooking the menu item */
 function mcd_plugin_menu() {
 	add_options_page('MCD Options', 'Client Detection', 'manage_options', 'mcd_plugin', 'mcd_options_page_hook');
 }
 
+/* the options page */
 function mcd_options_page_hook(){
-	
 	if(!current_user_can( 'manage_options')){die (__( "You don't have sufficient privileges to display this page", 'mcd_plugin' ) );}
-	
 	?>
 	<div class="wrap">
 		<div class="icon32" id="icon-options-general"></div>
@@ -331,20 +328,76 @@ function mcd_options_page_hook(){
 	<?php
 }
 
-function mcd_get_option( $name = NULL ){
-	$options = get_option('mcd_options');
-	if($options === FALSE){
-		add_option('mcd_options',array(0,1,0));
-	}
-	if(is_null($name)){
-		return get_option('mcd_options');
-	}
-	elseif(isset($options[$name])){
-		return $options[$name];
-	}
-	else {
-		return FALSE;
+/* footer debug output */
+function mcd_debug_output(){
+	
+	$mcd_options = mcd_get_option();
+	if((int)$mcd_options[1]==1){
+		
+		/* getting query_vars */
+		if(get_query_var('platform')){$platform = get_query_var('platform');}
+		if(get_query_var('browser')){$browser = get_query_var('browser');}
+		
+		switch($platform){
+			
+			/* phones */
+			case 'android 1':
+			case 'android 2':
+			case 'android-phone':		$tag = 'Android (Phone)';break;
+			case 'blackberry':			$tag = 'BlackBerry';break;
+			case 'iphone':
+			case 'ipod':						$tag = 'Apple (Phone)';break;
+			case 'iemobile':				$tag = 'mobile IE';break;
+			case 'webos':						$tag = 'webOS';break;
+			case 'mobile':					$tag = 'Phone';break;
+			
+			/* tablets */
+			case 'android 3':
+			case 'android 4':				
+			case 'android-tablet':	$tag = 'Android (Tablet)';break;
+			case 'ipad':						$tag = 'Apple (Tablet)';break;
+			case 'kindle':					$tag = 'Kindle (Tablet)';break;
+			case 'tablet':					$tag = 'Tablet';break;
+			
+			/* desktop clients */
+			case 'wow64':
+			case 'win64':						$tag = 'Windows x64';break;
+			case 'windows':					$tag = 'Windows x86';break;
+			case 'macintosh':				$tag = 'Macintosh';break;
+			case 'ppx mac os x':		$tag = 'PPC OSX';break;
+			case 'intel mac os x':	$tag = 'Intel OSX';break;
+			case 'desktop':					$tag = 'Desktop';break;
+			
+			/* bots */
+			case 'googlebot':
+			case 'googlebot-mobile':
+			case 'w3c_validator':		$tag = 'Bot';
+															break;
+			
+			/* this case will not happen - since the query_var defaults to desktop */
+			default:							$tag = $platform;break;
+			
+		}
+		
+		$theme = mcd_get_theme();
+		$html = '<div id="mcd_debug" style="width:420px;color:#FCFCFC;margin:auto;margin-top:-16px;cursor:default;">';
+		$html .='<ul style="list-style-type:none;margin-left:-30px">';
+		$html .='<li style="height:16px;">&raquo; This could be the '.$tag.' version of this blog ('.$browser.') &laquo;</li>';
+		$html .='<li style="height:16px;">Option General Results Only: '.(((int)$mcd_options[0]==1)?' Yes':'No').'</li>';
+		$html .='<li style="height:16px;">Standard 0: '.$theme[2].'/'.$theme[3].'.php'.(((int)$mcd_options[2]==0)?' (active)':'').'</li>';
+		$html .='<li style="height:16px;">Template 1: '.mcd_load_template(true).(((int)$mcd_options[2]==1)?' (active)':'').'</li>';
+		$html .='<li style="height:16px;">Theme 2: '.mcd_load_theme(true).(((int)$mcd_options[2]==2)?' (active)':'').'</li>';
+		
+		//$html .='<li style="float:left;height:16px;display:block;">('.$_SERVER['HTTP_USER_AGENT'].')</li>';
+		
+		$html .='</ul></div>';
+		echo $html;
 	}
 }
 add_action('init', 'mcd_init');
+
+/* some add-on functions (mode general only!) - written in the WP conditional style */
+function is_desktop(){return((get_query_var('platform')=='desktop')? true : false);}
+function is_mobile(){return((get_query_var('platform')=='mobile')? true : false);}
+function is_tablet(){return((get_query_var('platform')=='tablet')? true : false);}
 ?>

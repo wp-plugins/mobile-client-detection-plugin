@@ -70,11 +70,12 @@ Hint: Currently the wrapped paths get shown - but not loaded yet.
 2. The Debug Output shows how the template paths get wrapped dynamically.
 
 == Changelog ==
+= 0.7.3 =
+* Template arrays added to debug output.
 
 = 0.7.2 =
 * Theme / Template detection by regex added.
 * path-wrapping per platform is working.
-* Debug output extended by generated paths.
 
 = 0.7 =
 * Basic options page added.
