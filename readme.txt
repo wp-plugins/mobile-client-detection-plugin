@@ -43,8 +43,9 @@ so it's quite handy for fixing things for specific user-agents
 == Frequently Asked Questions ==
 
 = How does it work ? =
-The plugin just adds another query_var to each request (it uses PHP instead of mod_rewrite) -
-which can be used to load different template file (not yet implemented) – or to create templates with multi-device support.
+The plugin adds two query_vars to each request (it uses PHP instead of mod_rewrite) -
+which can be used to create templates with multi-device support (implemented)
+- or to load different themes & templates (not yet implemented).
 
 = Which values can the query_var 'platform' return ? =
 1. android-phone, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or general: mobile).
