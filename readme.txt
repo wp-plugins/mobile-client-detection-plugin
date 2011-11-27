@@ -75,7 +75,7 @@ Hint: Currently the arrays get shown in debug output - but not loaded yet...
 
 == Screenshots ==
 1. Options 'General Results' and 'Debug Output' are currently available.
-2. The Debug Output shows how the template paths get wrapped dynamically.
+2. The Debug Output shows how the templates get wrapped dynamically.
 
 == Changelog ==
 = 0.7.3 =
