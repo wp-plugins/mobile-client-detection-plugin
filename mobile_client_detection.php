@@ -4,7 +4,7 @@
 	Plugin URI: http://wordpress.org/extend/plugins/mobile-client-detection-plugin/
 	Description: The Mobile Client Detection Plug-in provides query_vars 'platform' & 'browser' for simply switching the layout within your theme (requires editing template files). It can also be very helpful when it’s required to load different versions of CSS/JS code.
 	Author: Martin Zeitler
-	Version: 0.7.0
+	Version: 0.7.2
 	Tags: plugin, mobile, theme, detect, query_var, layout, switch, page speed, platform, browser
 	Author URI: http://www.codefx.biz
 */
@@ -34,16 +34,78 @@ define('mcd_PLUGIN_URL', WP_PLUGIN_URL.'/'.plugin_basename(dirname( __FILE__)));
 /* init */
 function mcd_init(){
 	
+	/* add these filters by default */
 	add_filter('query_vars', 'mcd_add_vars');
 	add_filter('wp_head', 'mcd_set_vars');
-	
-	/* if debug mode is enabled */
+
+	/* get the options */
 	$mcd_options = mcd_get_option();
+	
+	/* if debug mode is enabled: */
 	if((int)$mcd_options[1]==1){$debug_output=true;}
 	if(!is_admin() && $debug_output){add_action('wp_footer','mcd_debug_output');}
 	
+	if ( defined('WP_USE_THEMES') && WP_USE_THEMES ){
+		/* if loading template is enabled: */
+		if((int)$mcd_options[2]==1){$load_template=true;}
+		if($load_template){add_action('template_redirect','mcd_load_template');}
+		
+		/* if loading themes is enabled: */
+		if((int)$mcd_options[2]==2){$load_theme=true;}
+		if($load_template){add_action('template_redirect','mcd_load_theme');}
+	}
 	/* hook options page for admins only */
 	if(is_admin() && current_user_can('manage_options')){add_action('admin_menu','mcd_plugin_menu');}
+}
+
+function mcd_get_theme() {
+	
+	/* some code from wp core */
+	global $wp_query;
+	$template = false;
+	if     ( is_404()            && $template = get_404_template()            ) :
+	elseif ( is_search()         && $template = get_search_template()         ) :
+	elseif ( is_tax()            && $template = get_taxonomy_template()       ) :
+	elseif ( is_front_page()     && $template = get_front_page_template()     ) :
+	elseif ( is_home()           && $template = get_home_template()           ) :
+	elseif ( is_attachment()     && $template = get_attachment_template()     ) :
+	elseif ( is_single()         && $template = get_single_template()         ) :
+	elseif ( is_page()           && $template = get_page_template()           ) :
+	elseif ( is_category()       && $template = get_category_template()       ) :
+	elseif ( is_tag()            && $template = get_tag_template()            ) :
+	elseif ( is_author()         && $template = get_author_template()         ) :
+	elseif ( is_date()           && $template = get_date_template()           ) :
+	elseif ( is_archive()        && $template = get_archive_template()        ) :
+	elseif ( is_comments_popup() && $template = get_comments_popup_template() ) :
+	elseif ( is_paged()          && $template = get_paged_template()          ) :
+	else :
+		$template = get_index_template();
+	endif;
+	
+	/* but here comes the extraction regex */
+	$pattern = '/\/(.*)\/(.*)\/(.*)\.php/i';
+	if(preg_match($pattern,$template,$arr)){
+		$theme_path=$arr[1];
+		$theme_name=$arr[2];
+		$template_name=$arr[3];
+		return array($theme_path,$theme_name,$template_name);
+	}
+	else {
+		return array();
+	}
+}
+
+function mcd_load_template() {
+	global $wp_query;
+	
+	if(get_query_var('platform')){
+		$platform = get_query_var('platform');
+	}
+	return true;
+}
+
+function mcd_load_theme($platform) {
+	return true;
 }
 
 /* add a query var to wp router */
@@ -196,9 +258,15 @@ function mcd_debug_output(){
 			
 		}
 		
-		$html =	'<span style="color:#FCFCFC;height:16px;margin-top:-16px;display:block;">
-							&raquo; You are currently viewing the '.$tag.' version of this blog ('.$browser.') &laquo;</span>';
-		// $html .='<span style="color:#FCFCFC;height:16px;margin-top:-16px;">('.$_SERVER['HTTP_USER_AGENT'].')</span>';
+		$theme = mcd_get_theme();
+		$html = '<div id="mcd_debug" style="width:420px;color:#FCFCFC;margin:auto;margin-top:-16px;cursor:default;">';
+		$html .='<ul style="list-style-type:none;margin-left:-30px">';
+		$html .='<li style="height:16px;">&raquo; This could be the '.$tag.' version of this blog ('.$browser.') &laquo;</li>';
+		$html .='<li style="height:16px;">Standard - Mode 0: /'.$theme[1].'/'.$theme[2].'.php'.(((int)$mcd_options[2]==0)?' (active)':'').'</li>';
+		$html .='<li style="height:16px;">Template - Mode 1: /'.$theme[1].'/'.$theme[2].'-'.$platform.'.php'.(((int)$mcd_options[2]==1)?' (active)':'').'</li>';
+		$html .='<li style="height:16px;">Theme - Mode 2: /'.$theme[1].'-'.$platform.'/'.$theme[2].'.php'.(((int)$mcd_options[2]==2)?' (active)':'').'</li>';
+		//$html .='<li style="float:left;height:16px;display:block;">('.$_SERVER['HTTP_USER_AGENT'].')</li>';
+		$html .='</ul></div>';
 		echo $html;
 	}
 }
