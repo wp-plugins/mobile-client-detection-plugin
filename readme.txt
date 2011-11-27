@@ -35,15 +35,13 @@ so it's quite handy for fixing things for specific user-agents
 
 = How does it work ? =
 The plugin just adds another query_var to each request (it uses PHP instead of mod_rewrite) -
-which can be used to load different template file (not yet implemented) – or to create templates with multi device support.
+which can be used to load different template file (not yet implemented) – or to create templates with multi-device support.
 
 = Which values can the query_var 'platform' return ? =
 Currently it returns the tag for each known platform:
 a) android 1, android 2, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or general: mobile).
 b) android 3,android 4, ipad, kindle (or general: tablet).
 c) windows, win64, wow64, macintosh, ppx mac os x, intel mac os x (or general: desktop).
-
-Set option $general_only=true; in case you require the general result.
 
 The value 'desktop' can be (most likely) considered as a desktop PC -
 since there’s pretty much any popular mobile platform covered.
@@ -55,14 +53,16 @@ b) msie 5,msie 6, msie 7, msie 8, msie 9, chrome, camino, firefox, safari (or ge
 c) w3c_validator, googlebot (or general: bot)
 
 = Does this plugin have any options ? =
-You can find the options in the menu under Settings > Client Detection.
-Template & theme switching has not been implemented yet.
+You can find the options in the menu under Settings > Client Detection:
+1. 'General Only': Yes/No - limit results to mobile, tablet, deskop, bot
+2. 'Debug Output': Yes/No - append debug output to the footer on front-end
+3. 'Modus Operandi': Standard/Template overloading/Theme overloading - not implemented yet.
 
 = Which further core features will be implemented until v1.0 ? =
 1. checking for existance of wrapped template files.
 2. attempt to overload the wrapped template paths.
 
-Currently the paths get only shown - but not loaded.
+Hint: Currently the wrapped paths get shown - but not loaded yet.
 
 == Screenshots ==
 
