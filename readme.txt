@@ -20,7 +20,7 @@ This plug-in provides the required variable for serving a customized version of 
 
 Currently it can detect the following mobile platforms:
 1. Android Phones (Android 1.x & 2.x)
-2. Android Tablets (Android 3.x & 4.x),
+2. Android Tablets (Android 3.x & 4.x)
 3. Blackberry
 4. iPad, iPhone, iPod
 5. IE mobile
