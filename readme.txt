@@ -60,7 +60,9 @@ Template & theme switching has not been implemented yet.
 
 = Which further core features will be implemented until v1.0 ? =
 1. checking for existance of wrapped template files.
-2. attempt to overloading the wrapped template paths.
+2. attempt to overload the wrapped template paths.
+
+Currently the paths get only shown - but not loaded.
 
 == Screenshots ==
 
