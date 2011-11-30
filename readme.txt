@@ -16,8 +16,10 @@ It can also be very helpful when it’s required to load different versions of C
 
 In case the mobile version of your blog shall have a different layout
 or if you need to load alternate CSS/JS files for a specific browsers:
+
 This plug-in can overload template files and theme directories - by the detected platform.
-and it can provide query_vars 'platform' & 'browser' for creating multi-device templates.
+
+And it can provide query_vars 'platform' & 'browser' for creating multi-device templates.
 
 Currently it can detect the following mobile platforms:
 1. Android Phones (Android 1.x & 2.x)
