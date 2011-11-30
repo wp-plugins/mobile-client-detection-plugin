@@ -84,30 +84,30 @@ You can find the options in the menu under Settings > Mobile Client Detection.
 * Theme / Template detection by regex added.
 * path-wrapping per platform is working.
 
-= 0.7 =
+= 0.7.0 =
 * Basic options page added.
 * option 'General Results Only' added.
 * option 'Footer Debug Output' added.
 
-= 0.6 =
+= 0.6.0 =
 * Tablet detection added (thanks to Mystech for the request).
 * Android & IE Version detection added.
 * Mobile Safari detection fixed.
 * readme.txt updated.
 
-= 0.5 =
+= 0.5.0 =
 * Support for Kindle & Symbian added.
 * Browser detection added.
 
-= 0.4 =
+= 0.4.0 =
 * 'Footer Output' option added.
 * 'General results only' option added.
 
-= 0.3 =
+= 0.3.0 =
 * Example added.
 
-= 0.2 =
+= 0.2.0 =
 * Initial release.
 
-= 0.1 =
+= 0.1.0 =
 * Proof of concept.
