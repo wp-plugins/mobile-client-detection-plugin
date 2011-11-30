@@ -3,14 +3,14 @@
 	Plugin Name: Mobile Client Detection Plugin
 	Plugin URI: http://wordpress.org/extend/plugins/mobile-client-detection-plugin/
 	Description: The Mobile Client Detection Plugin can overload platform-specific templates / themes and provides query_vars 'platform' & 'browser'.
-	Author: Martin Thomas Zeitler
+	Author: Martin T. Zeitler
 	Version: 0.8.2
 	Tags: plugin, detect, mobile, theme, template, query_var, layout, switch, page speed, platform, browser
 	Author URI: http://www.codefx.biz
 	
 	
 	
-	Copyright 2011 by Martin Thomas Zeitler (email: martin at codefx.biz)
+	Copyright 2011 by Martin T. Zeitler (email: martin at codefx.biz)
 	
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
