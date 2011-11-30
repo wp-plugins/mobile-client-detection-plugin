@@ -13,25 +13,16 @@ and provides query_vars 'platform' & 'browser'.
 == Description ==
 
 In case the mobile version of your blog shall have a different layout
-or if you need to load alternate CSS/JS files for a specific browsers:
+or when it’s required to load different versions of CSS/JS code.:
 
 This plug-in can overload template files and theme directories - by the detected platform.
 
 And it can provide query_vars 'platform' & 'browser' for creating multi-device templates.
 
-It can also be very helpful when it’s required to load different versions of CSS/JS code.
-
 Currently it can detect the following mobile platforms:
-1. Android Phones (Android 1.x & 2.x)
-2. Android Tablets (Android 3.x & 4.x)
-3. Blackberry
-4. iPad, iPhone, iPod
-5. IE mobile
-6. Kindle
-7. SymbianOS
-8. PalmOS
-9. webOS
-10. GoogleBot mobile.
+Android Phones (Android 1.x & 2.x), Android Tablets (Android 3.x & 4.x),
+Blackberry, iPad, iPhone, iPod, IE mobile, Kindle, SymbianOS, PalmOS, webOS,
+GoogleBot mobile.
 
 It also can detect several desktop platforms (e.g. Internet Explorer)
 so it's quite handy for fixing things for specific user-agents
@@ -67,7 +58,7 @@ since there’s pretty much any popular mobile platform covered.
 1. 'General Only': Yes/No - limit results to mobile, tablet, deskop, bot
 2. 'Debug Output': Yes/No - append debug output to the footer on front-end
 3. 'Modus Operandi': default WP template / template-overloading / theme-overloading
-4. 'Add query_vars platform & browser': Yes/No - as the title says...
+4. 'Add query_vars platform & browser': Yes/No - those vars are available in any theme file.
 
 = Where can I find these options ? =
 You can find the options in the menu under Settings > Mobile Client Detection.
@@ -76,15 +67,15 @@ You can find the options in the menu under Settings > Mobile Client Detection.
 1. adding a optional facility for logging & submitting user-agent strings.
 
 == Screenshots ==
-1. This screenshot shows the current options screen, as per v0.8.2.
-2. The Debug Output shows how the template paths get wrapped dynamically.
+1. This screenshot shows the current options screen, as per Version 0.8.2.
+2. The Debug Output shows how the template paths get wrapped dynamically (outdated screenshot).
 
 == Changelog ==
 = 0.8.2 =
 * Template file overloading works.
 * Theme directory overloading works.
 * Checks if the templates file even exist.
-* Made the query_vars optional.
+* option 'Setup query_vars' added.
 
 = 0.7.3 =
 * Template arrays added to debug output.
@@ -95,11 +86,11 @@ You can find the options in the menu under Settings > Mobile Client Detection.
 
 = 0.7 =
 * Basic options page added.
-* option 'General Results' added.
-* option 'Debug Output' added.
+* option 'General Results Only' added.
+* option 'Footer Debug Output' added.
 
 = 0.6 =
-* Tablet detection added (thanks to Mystech).
+* Tablet detection added (thanks to Mystech for the request).
 * Android & IE Version detection added.
 * Mobile Safari detection fixed.
 * readme.txt updated.
