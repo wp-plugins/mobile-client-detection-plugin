@@ -5,10 +5,10 @@ Donate link: http://www.codefx.biz/donations
 Tags: plugin, mobile, phone, tablet, theme, detect, query_var, layout, switch, page speed, platform, browser
 Requires at least: 3.0.0
 Tested up to: 3.2.1
-Stable tag: 0.7
+Stable tag: 0.8.2
 
-The Mobile Client Detection Plug-in provides query_vars 'platform' & 'browser'
-for simply switching the layout within your theme (requires editing template files).
+The Mobile Client Detection Plugin can overload template files and theme directories
+and it can provide query_vars 'platform' & 'browser' - which are available in template files.
 
 It can also be very helpful when it’s required to load different versions of CSS/JS code.
 
@@ -16,7 +16,8 @@ It can also be very helpful when it’s required to load different versions of C
 
 In case the mobile version of your blog shall have a different layout
 or if you need to load alternate CSS/JS files for a specific browsers:
-This plug-in provides the required variable for serving a customized version of your theme!!
+This plug-in can overload template files and theme directories - by the detected platform.
+and it can provide query_vars 'platform' & 'browser' for creating multi-device templates.
 
 Currently it can detect the following mobile platforms:
 1. Android Phones (Android 1.x & 2.x)
@@ -43,9 +44,9 @@ so it's quite handy for fixing things for specific user-agents
 == Frequently Asked Questions ==
 
 = How does it work ? =
-The plugin adds two query_vars to each request (it uses PHP instead of mod_rewrite) -
-which can be used to create templates with multi-device support (implemented)
-- or to load different themes & templates (not yet implemented).
+The plugin adds two query_vars to each request (it uses PHP instead of mod_rewrite),
+which can be used to create templates with multi-device support -
+or to send out platform-specific template-files / theme-directories.
 
 = Which values can the query_var 'platform' return ? =
 1. android-phone, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or general: mobile).
@@ -63,22 +64,26 @@ since there’s pretty much any popular mobile platform covered.
 = Does this plugin have any options ? =
 1. 'General Only': Yes/No - limit results to mobile, tablet, deskop, bot
 2. 'Debug Output': Yes/No - append debug output to the footer on front-end
-3. 'Modus Operandi': Standard/Template overloading/Theme overloading - not implemented yet.
+3. 'Modus Operandi': default WP template / template-overloading / theme-overloading
+4  'Add query_vars platform & browser': Yes/No - as the title says...
 
 = Where can I find these options ? =
-You can find the options in the menu under Settings > Client Detection.
+You can find the options in the menu under Settings > Mobile Client Detection.
 
 = Which further core features will be implemented until v1.0 ? =
-1. checking for existance of wrapped template files.
-2. attempt to overload the wrapped template paths.
-
-Hint: Currently the arrays get shown in debug output - but not loaded yet...
+1. adding a optional facility for logging & submitting user-agent strings.
 
 == Screenshots ==
-1. Options 'General Results' and 'Debug Output' are currently available.
-2. The Debug Output shows how the templates get wrapped dynamically.
+1. This screenshot is currently a bit outdated... will be updated soon.
+2. The Debug Output shows how the templates paths get wrapped dynamically.
 
 == Changelog ==
+= 0.8.2 =
+* Template file overloading works.
+* Theme directory overloading works.
+* Checks if the templates file even exist.
+* Made the query_vars optional.
+
 = 0.7.3 =
 * Template arrays added to debug output.
 
