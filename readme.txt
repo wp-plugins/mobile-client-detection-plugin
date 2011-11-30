@@ -46,7 +46,7 @@ so it's quite handy for fixing things for specific user-agents
 = How does it work ? =
 The plugin adds two query_vars to each request (it uses PHP instead of mod_rewrite),
 which can be used to create templates with multi-device support -
-or to send out platform-specific template-files / theme-directories.
+and it can send out platform-specific template-files or whole themes!!
 
 = Which values can the query_var 'platform' return ? =
 1. android-phone, blackberry, windows, iphone, ipod, iemobile, webos, symbian, googlebot-mobile (or general: mobile).
@@ -75,7 +75,7 @@ You can find the options in the menu under Settings > Mobile Client Detection.
 
 == Screenshots ==
 1. This screenshot is currently a bit outdated... will be updated soon.
-2. The Debug Output shows how the templates paths get wrapped dynamically.
+2. The Debug Output shows how the template paths get wrapped dynamically.
 
 == Changelog ==
 = 0.8.2 =
