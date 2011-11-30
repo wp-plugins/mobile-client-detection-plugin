@@ -76,7 +76,7 @@ You can find the options in the menu under Settings > Mobile Client Detection.
 1. adding a optional facility for logging & submitting user-agent strings.
 
 == Screenshots ==
-1. This screenshot is currently a bit outdated... will be updated soon.
+1. This screenshot shows the current options screen, as per v0.8.2.
 2. The Debug Output shows how the template paths get wrapped dynamically.
 
 == Changelog ==
