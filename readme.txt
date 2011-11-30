@@ -67,7 +67,7 @@ since there’s pretty much any popular mobile platform covered.
 1. 'General Only': Yes/No - limit results to mobile, tablet, deskop, bot
 2. 'Debug Output': Yes/No - append debug output to the footer on front-end
 3. 'Modus Operandi': default WP template / template-overloading / theme-overloading
-4  'Add query_vars platform & browser': Yes/No - as the title says...
+4. 'Add query_vars platform & browser': Yes/No - as the title says...
 
 = Where can I find these options ? =
 You can find the options in the menu under Settings > Mobile Client Detection.
