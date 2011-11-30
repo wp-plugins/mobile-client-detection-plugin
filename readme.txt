@@ -7,10 +7,8 @@ Requires at least: 3.0.0
 Tested up to: 3.2.1
 Stable tag: 0.8.2
 
-The Mobile Client Detection Plugin can overload template files and theme directories
-and it can provide query_vars 'platform' & 'browser' - which are available in template files.
-
-It can also be very helpful when it’s required to load different versions of CSS/JS code.
+The Mobile Client Detection Plugin can overload platform-specific templates and themes
+and provides query_vars 'platform' & 'browser'.
 
 == Description ==
 
@@ -20,6 +18,8 @@ or if you need to load alternate CSS/JS files for a specific browsers:
 This plug-in can overload template files and theme directories - by the detected platform.
 
 And it can provide query_vars 'platform' & 'browser' for creating multi-device templates.
+
+It can also be very helpful when it’s required to load different versions of CSS/JS code.
 
 Currently it can detect the following mobile platforms:
 1. Android Phones (Android 1.x & 2.x)
