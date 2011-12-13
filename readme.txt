@@ -4,7 +4,7 @@ Contributors: syslogic
 Donate link: http://www.codefx.biz/donations
 Tags: plugin, mobile, phone, tablet, theme, detect, query_var, layout, switch, page speed, platform, browser
 Requires at least: 3.0.0
-Tested up to: 3.2.1
+Tested up to: 3.3
 Stable tag: 0.8.2
 
 The Mobile Client Detection Plugin can overload platform-specific templates and themes
