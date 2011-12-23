@@ -7,8 +7,7 @@ Requires at least: 3.0.0
 Tested up to: 3.3
 Stable tag: 0.8.2
 
-The Mobile Client Detection Plugin can overload platform-specific templates and themes
-and provides query_vars 'platform' & 'browser'.
+The Mobile Client Detection Plugin can overload platform-specific templates and themes and provides query_vars platform & browser.
 
 == Description ==
 
