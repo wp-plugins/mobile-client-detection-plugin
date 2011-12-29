@@ -326,8 +326,8 @@ function mcd_options_page_hook(){
 				
 				<h3>Add query_vars 'platform' & 'browser':</h3>
 				<select id="add_vars" name="add_vars">
-					<option value="0"<?php echo(($mcd_options[3]==1)?' selected="selected"':'');?>>Yes</option>
-					<option value="1"<?php echo(($mcd_options[3]==0)?' selected="selected"':'');?>>No</option>
+					<option value="1"<?php echo(($mcd_options[3]==1)?' selected="selected"':'');?>>Yes</option>
+					<option value="0"<?php echo(($mcd_options[3]==0)?' selected="selected"':'');?>>No</option>
 				</select>
 				<br/>
 				
