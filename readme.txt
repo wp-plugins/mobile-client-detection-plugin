@@ -4,8 +4,8 @@ Contributors: syslogic
 Donate link: http://www.codefx.biz/donate-some
 Tags: plugin, mobile, phone, tablet, theme, detect, query_var, layout, switch, page speed, platform, browser
 Requires at least: 3.0.0
-Tested up to: 3.3
-Stable tag: 0.8.2
+Tested up to: 3.3.2
+Stable tag: 0.9.0
 
 The Mobile Client Detection Plugin can overload platform-specific themes or templates - and it provides query_vars platform & browser.
 
@@ -62,14 +62,22 @@ since there’s pretty much any popular mobile platform covered.
 = Where can I find these options ? =
 You can find the options in the menu under Settings > Mobile Client Detection.
 
-= Which further core features will be implemented until v1.0 ? =
-1. adding a optional facility for logging & submitting user-agent strings.
+= Does this plug-in provide any conditional statements ? =
+1. is_desktop()
+2. is_mobile()
+3. is_tablet()
+4. is_chrome()
+5. is_explorer()
 
 == Screenshots ==
 1. This screenshot shows the current options screen, as per Version 0.8.2.
-2. The Debug Output shows how the template paths get wrapped dynamically (outdated screenshot).
+2. The Debug Output shows how the template paths get wrapped dynamically (outdated).
 
 == Changelog ==
+= 0.9.0 =
+* Conditional statement accessibility improved (thanks to Offereins for the suggestion).
+* Added further regex conditional statements: is_chrome(), is_explorer()
+
 = 0.8.2 =
 * Template file overloading works.
 * Theme directory overloading works.

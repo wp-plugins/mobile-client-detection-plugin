@@ -2,15 +2,14 @@
 /*
 	Plugin Name: Mobile Client Detection Plugin
 	Plugin URI: http://wordpress.org/extend/plugins/mobile-client-detection-plugin/
-	Description: The Mobile Client Detection Plugin can overload platform-specific templates / themes and provides query_vars 'platform' & 'browser'.
+	Description: The Mobile Client Detection Plugin can overload (display instead of) platform-specific templates / themes and provides query_vars 'platform' & 'browser'.
 	Author: Martin T. Zeitler
-	Version: 0.8.2
+	Version: 0.9.0
 	Tags: plugin, detect, mobile, theme, template, query_var, layout, switch, page speed, platform, browser
 	Author URI: http://www.codefx.biz
 	
 	
-	
-	Copyright 2011 by Martin T. Zeitler (email: martin at codefx.biz)
+	Copyright 2011-2012 by Martin T. Zeitler (email: martin at codefx.biz)
 	
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -71,11 +70,15 @@ function mcd_init(){
 }
 
 /* Stage 1: Platform Detection - supports several desktop platforms as well */
-function mcd_get_platform(){
+/* option 'general output' is forced for the conditional statements, else option is read */
+function mcd_get_platform($general_output=false){
 	
-	/* get option index 0 */
-	$mcd_options = mcd_get_option();
-	if((int)$mcd_options[0]==1){$general_output=true;}
+	if(!$general_output){
+		
+		/* get option index 0 */
+		$mcd_options = mcd_get_option();
+		if((int)$mcd_options[0]==1){$general_output=true;}
+	}
 	
 	$ua = trim(strtolower($_SERVER['HTTP_USER_AGENT']));
 	$pattern = '/(android\s\d|blackberry|ip(hone|ad|od)|iemobile|webos|palm|symbian|kindle|windows|win64|wow64|macintosh|intel\smac\sos\sx|ppx\smac\sos\sx|googlebot|googlebot-mobile)/';
@@ -446,8 +449,13 @@ function mcd_debug_output(){
 /* bootstrap */
 add_action('init', 'mcd_init');
 
-/* add-on functions written in WP conditional style (option general results only required!) */
-function is_desktop(){return((get_query_var('platform')=='desktop')? true : false);}
-function is_mobile(){return((get_query_var('platform')=='mobile')? true : false);}
-function is_tablet(){return((get_query_var('platform')=='tablet')? true : false);}
+/* Add-On WP conditional statements */
+/* function accessibility improved with suggestions made by Offereins */
+function is_desktop(){return((mcd_get_platform(true)=='desktop')? true : false);}
+function is_mobile(){return((mcd_get_platform(true)=='mobile')? true : false);}
+function is_tablet(){return((mcd_get_platform(true)=='tablet')? true : false);}
+
+/* some more conditional goodies created @ codefx.biz */
+function is_chrome(){if(preg_match('/\schrome/(\d+)\./',strtolower($_SERVER["HTTP_USER_AGENT"]),$a)){return true;}else{return false;}}
+function is_explorer(){if(preg_match('/msie\s(\d+)\.(\d+)/',strtolower($_SERVER["HTTP_USER_AGENT"]),$a)){return true;}else{return false;}}
 ?>
