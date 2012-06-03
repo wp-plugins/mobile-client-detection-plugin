@@ -71,7 +71,7 @@ You can find the options in the menu under Settings > Mobile Client Detection.
 
 == Screenshots ==
 1. This screenshot shows the current options screen, as per Version 0.8.2.
-2. The Debug Output shows how the template paths get wrapped dynamically (outdated).
+2. Debug Output on a Android 4.0 ICS Tablet, as per Version 0.8.2.
 
 == Changelog ==
 = 0.9.0 =
