@@ -27,7 +27,7 @@ It also can detect several desktop platforms (e.g. Internet Explorer)
 so it's quite handy for fixing things for specific user-agents
 (instead of using conditional CSS).
 
-*Please be aware the this is a support plug-in than a fully featured mobile theme.*
+*Please be aware the this is a support plug-in, not a fully featured mobile theme.*
 
 == Installation ==
 
